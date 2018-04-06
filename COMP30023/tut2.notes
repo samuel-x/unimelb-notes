@@ -1,0 +1,91 @@
+!Tutorial 2 - Computer Systems
+
+1. International Standards Pros and Cons:
+Pros					| Cons
+Secure					| Long time to implement
+Extensibility			| 
+
+2. Suppose the algorithms used to implement the operations at layer k is changed. How does this impact operations at layers k-1 and k+1?
+	- Layers k+1 will call to layer k
+	- Layers k-1 will be called by layer k
+	- Layers above do not need to know how to implement lower levels
+	- No overall impact
+
+3. Suppose there is a change in the service (set of operations) provided by layer k. How does this impact services at layers k-1 and k+1?
+	- Layers above k depend on level k, so this will impact services above
+	- Operations above will change if the interfaces change
+
+4. A system has an n-layer protocol hierarchy. Applications generate messages of length M bytes. At each of the layers, an h-byte header is added. What fraction of the network bandwidth is filled with headers?
+	- Number of Messages * number of layers in protocol * number of bytes per header
+	= M*n*h -> nh/nh+M of the bandwidth is just headers
+
+5. List five nonproprietary internet applications and the application-layer protocols they use.
+	1. E-mail - HTTP
+	2. The Web - IMAP, SMTP, POP3
+	3. File Transfer - FTP
+	4. Remote Login - SSH, Telnet
+	5. Steaming Media - VoIP, RTP, WebRTC
+	6. Instant Messaging - IRC, XMPP
+
+6. Consider an e-commerce site that wants to keep a purchase record for each of its customers. Describe how this can be done with cookies.
+	- A cookie contains user identification data
+	- This can be used by the browser to provide stuff
+	- The server would create a session and store login time
+	- The server would be responsible for expiring cookies
+
+7. Consider the following string of ASCII characters that were captured by Wireshark when the browser sent an HTTP GET message (i.e., this is the actual content of an HTTP GET message). The characters hcrihlfi are carriage return and line-feed characters Answer the following questions, indicating where in the HTTP GET message below you find the answer.
+	
+GET /people/index.html HTTP/1.1<cr><lf>
+Host: cis.unimelb.edu.au<cr><lf>
+Connection: keep-alive<cr><lf>
+Cache-Control: max-age=0<cr><lf>
+Upgrade-Insecure-Requests: 1<cr><lf>
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64)
+AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36<cr><lf>
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,
+image/webp,image/apng,*/*;q=0.8<cr><lf>
+Accept-Encoding: gzip, deflate<cr><lf>
+Accept-Language: en-US,en;q=0.9<cr><lf>
+<cr><lf>
+
+a) What is the URL of the document requested by the browser?
+	- https://cis.unimelb.edu.au/people/index.html
+
+b) What version of HTTP is the browser running?
+	- 1.1
+
+c) Does the browser request a non-persistent or a persistent connection?
+	- Persistant (connection: keep-alive)
+	- Default behaviour of 1.1 is to create persistent connection
+
+d) What is the IP address of the host on which the browser is running?
+	- Application layer does not know IP address which is in the Network Layer
+	- Layers operate indepemdently from each other
+
+e) What type of browser initiates this message? Why is the browser type needed in an HTTP request message?
+	- Chrome
+	- almost every browser will pretend to be mozilla 5.0?
+	- In history a server would need to know what the browser's capabilities were e.g. frames
+
+8. True or false?
+a) A user requests a Web page that consists of some text and three images. For this page, the client will send one request message and receive four response messages.
+	- False, they will send four
+	- If it's a persistent connection then it will only need 1 connection
+	- If not, itll need multiple
+
+b) Two distinct Web pages (for example, http://cis.unimelb.edu.au/research/ and http://cis.unimelb.edu.au/people) can be sent over the same persistent connection.
+	- True, see above
+
+c) With nonpersistent connections between browser and origin server, it is possible for a single TCP connection to carry two distinct HTTP request messages.
+	- False, see above
+
+d) The Date: header in the HTTP response message indicates when the object in the response was last modified.
+	- False, it's the date when it was sent, not modified
+	- This field is called "Last Modified"
+
+e) HTTP response messages never have an empty message body.
+	- False
+	- Responses of the type 1xx, 204 and 304 have empty message bodies.
+	- lol
+
+	

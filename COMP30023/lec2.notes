@@ -1,0 +1,256 @@
+!Lecture 2 - Computing Systems
+
+Last Week:
+Introduction to COMP30023
+History of the Internet
+Network Protocol models (stacks)
+OSI vs TCP/IP
+
+Top Down Approach:
+- Going through the layers over the next few weeks
+
+Application Layer:
+- HTTP and HTML
+
+Wireshark:
+- Viewing network protocols in realtime
+
+Hyptertext:
+- Creation and use of linked content
+
+# Timeline of the World Wide Web:
+
+Sir Tim Berners-Lee
+- '89 Proposed "A large hypertext database with typed links"
+
+1991			| GOPHER - Protocol developed at Uni Minnesota
+					- Hierarchical file structure
+					- Suited for text - lower network
+
+May 1994 		| First International WWW Conference
+
+September 1994 	| W3C formed (DARPA & European Comm.)
+					- Standardisation of Web Tech
+
+1994-1998		| Browser Wars (Microsoft vs Netscape)
+
+1999-2001		| .com boom
+
+2002+			| Ubiquitous Web -> semantic web/social media
+
+-----------------------------------------------------------------
+
+# Components in WWW
+
+Client 	- you accessing a page in a Browser
+Server 	- Daemon based content delivery
+URL		- Protocol + DNS Name + File Name
+
+HypterText Transfer Protocol:
+- Defined everything needed for the web
+
+TCP/IP Model vs OSI Model:
+- Application layers
+
+Resources are referenced by URLS
+
+Uniform Resource Locator
+- Defined in original HTTP spec
+- An address for a Resource
+- Relative "./nextpage.html" vs absolute "http://www.google.com"
+
+Separate spec by W3C formed in 1998 for URI
+- "Uniform resource identifier
+- scheme:[::[user[:password]@]host[:port]][/path][?query][#fragment]
+
+-----------------------------------------------------------------
+
+# HTTP - Protocol Overview
+
+How it works:
+- Client initiates TCP connection to server (port 80)
+- Server accepts TCP connection from Client
+- HTTP messages exchanged between browser and web server
+- TCP connection closed
+
+Connections:
+- HTTP 1.0 - Single use connection // Inefficient AF - connection required for every element
+- HTTP 1.1 - Persistent Connections
+- HTTP/2 - 2015 - Further speed improvements // Improved caching, pipelining etc.
+
+# Non-persistent HTTP Overview
+1a. HTTP Client initiates TCP connection to HTTP server on port 80
+1b. HTTP server waiting for TCP connection accepts connection on port 80, notifies Client
+2.	Client HTTP request message into TCP connection socket. Client indicates it wants object
+3.	Server recieves request message - responds and sends object message into socket
+5.	Client recieves response message with HTML file, displays this.
+	Parses file, finds jpeg objects
+4.	HTTP server closes connection
+6. 	Steps 1-5 repeated for every jpeg object
+
+# HTTP Request Methods
+
+There are many methods used in HTTP:
+
+Method 			| Safe 				| Idempotent 		| Cacheable
+GET				| Y 				| Y 				| Y
+HEAD			| Y 				| Y 				| Y
+POST			| N 				| N 				| Y/N 			// Typically used to creates orders
+PUT				| N 				| Y 				| N  			// Typically used to update orders - has 1 call
+DELETE			| N 				| Y 				| N
+CONNECT 		| N 				| N 				| N
+OPTIONS			| Y 				| Y 				| N
+TRACE 			| Y 				| Y 				| N  			// recommended to disable TRACE - gives cookies
+PATCH 			| N 				| N 				| N
+
+Idempotent - multiple identical requests have same effect
+Safe - only for information retrieval - shouldn't change state
+
+# HTTP Request Example
+
+Request is in typical ASCII
+
+GET /somedir/page.html HTTP/1.1 		// Request line (GET, POST, HEAD)
+Host: www.somesite.com.au 				// Header Lines
+User-agent: Mozilla/4.0 
+Connection: close 
+Accept-language: fr 					// Carriage return - line feed indicates EoM
+
+
+HTTP Response Codes:
+
+1xx		| Information 		| 100 - Agrees to handle client's request
+2xx		| Success			| 200 = request succeeeded; 204 = no content
+3xx		| Redirection 		| 301 = Page moved
+4xx		| Client error		| 404 not found
+5xx 	| Server error 		|
+
+# HTTP Response Example:
+
+HTTP/1.1 200 OK 						// Status line
+Connection close 						// Header Lines
+Date: Thu, 06 Aug 2009 12:00:15 GMT 
+Server: Apache/2.2.11 (Unix) 			// generally change this to hide vulnerabilities
+Last-modified: Mon, 22 Jun 2009 
+Content-Length: 6821 
+Content-Type: text/html
+
+<html>...								// Data
+
+You can find a list of HTTP Headers here:
+https://en.wikipedia.org/wiki/List_of_HTTP_header_fields
+
+# Wireshark
+- Program used to analyse network protocols
+- Shows HTTP requests and responses
+// This will be used in the labs!
+
+------------------------------------------------------------------
+    Client & Server Side Processing
+-----------------------------------------------------------
+
+# Client 
+
+Plugins/Extensions - Integrated Software module which executes inside the browser
+	- Javascript
+	- Used to be rendered via adobe applications
+
+Helper - Seperate program which can be instantiated by the browser, 
+		 but can only access local cache of file content
+	- Applications/pdf
+	- Application/msword
+// Typically servers must be configured to show what kind of files are sent
+// IF it isn't the browser will simply dump to harddrive and you have to figure it out
+// e.g. this is a pdf
+
+# Server
+
+Five step process:
+- Accept TCP connection
+- Identify the file requested
+- Get the specified file from local disk storage
+- Send file to the client
+- Release TCP connection
+
+Servers should be multi-threaded 
+- they should be able to handle many requests as single threads are very slow
+
+A processing module performs a series of steps:
+- Resolve name of web page requested
+- Perform access control
+- Check cache
+- Fetch requested page from disk or run program
+- Determine the rest of the response
+- Return the response to the client
+- Make an entry in the server log
+
+# Web Cache
+Goal: Satisfy client requestion <without involving origin server> - reduce response time
+
+# Web Proxy
+- Used for <caching and security>
+- The browser sends all requests <to the proxy>. The proxy <returns objects in its cache> or
+	<else the proxy requests object from origin server>, then returns object to client.
+
+// Typically if you are connecting to a organisation you are connecting to a TLS proxy and not the actual organisation
+// Shouldn't be putting certain content (e.g. votes) on 3rd party servers
+
+# Cookies 
+- Small amount of information placed on the user's computer and re-used deterministically
+- Cookies of 5 fields: domain, path, content, expiry, security
+- How to keep state - maintain state
+- Questionable mechanism for tracking users
+
+Example cookies:
+
+Name 			Value 				Domain 				Expires 		HTTPOnly	Secure
+Session-id		356-7555.....		.amazon.com.au 		2036-01-01.		-			-
+
+These will be used to track you - particularly with google ads/facebook
+
+
+-----------------------------------------------------------
+    Static Web Documents
+-----------------------------------------------------------
+
+HTML - Hypertext Markup Language:
+- Simple language designed to encode both content/presentational information
+- Plain text encoding with browser based rendering
+- Restricted to ISO-8859 Latin-1 Character Set 
+
+Web Page Components:
+- Structural divisions
+- Syntactically Restricted Tag Steps
+
+HTML 5.0
+Now the default standard 
+Built in support for video etc.
+
+XML and XSL:
+- Primary feature of these technologies is the separation of content and presentational Markup
+
+XHTML:
+- Essentially an expression of HTML 4.0 as valid XML
+- Major differences to HTML 4.0 are the requirements for conformance, cafe folding etc.
+
+-----------------------------------------------------------
+    Dynamic Content
+-----------------------------------------------------------
+
+Scripts which run in the web browser process - described by html/css 
+
+Client Side Scriptng:
+- Javascript
+- Java Applets - compiled java code 
+- ActiveX - compiled code for windows
+- AJAX // this is used mostly
+- HTML and CSS: Present information as pages
+- DOM: Change parts of pages while they are views.
+- XML: LEt programs change data with the server.
+- An asynchronous way to send and retrieve data
+- Javascript as a language to bind this all together
+
+// Changes a lot as it allows you to change parts of the page instead of requesting a new one
+// Change in user interface
+
+
