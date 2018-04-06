@@ -2,7 +2,7 @@
 
 ## Application Layer, DNS, Mail - Streaming
 
-###DNS: Domain Name System
+### DNS: Domain Name System
 Used to resolve URLs to an absolute location
 - e.g. google.com vs ip address
 
@@ -17,21 +17,21 @@ For now, just consider them to be unique numerical identifier
 DNS is essentially the **technology behind mapping host.domain.com to an IP address**.
 Hierarchy goes from "right to left" com -> domain -> host
 
-###Four elements compromise the DNS:
-####Domain name space: 
+### Four elements compromise the DNS:
+#### Domain name space: 
 - DNS uses a **tree-structured name space** to **identify** resources on the internet
-####DNS Database: 
+#### DNS Database: 
 - Each **Node/leaf** in the name space tree **names a set of information** that is contained in a **resource record**. The collection of all RRs is organised into a distributed dbs.
-####Name Servers:
+#### Name Servers:
 - Server programs that hold information about a portion of the domain name tree and the associated RRs.
 - The **roots** of the DNS database
-####Resolver:
+#### Resolver:
 - "What happens on your machine"
 - The resolver queries the necessary DNSs it requires to get the URL
 - These are programs that **extract information** from name servers in response to client requests
 - Pretty much all OSs have this built in.
 
-###Domain Names:
+### Domain Names:
 - Case sensitive
 - Up to 63 characters per constituent
 - Can have up to 255 chars per path
@@ -49,7 +49,7 @@ Absolute domain ends in a '.'
 
 Relative domain names end in a constituent e.g. .com
 
-####Big division of DNS namespace
+#### Big division of DNS namespace
  - "Generic" for the US
  - US-Orientated
  - A lot of countries have top-level domains which are used for their governmental related content
@@ -72,18 +72,18 @@ Higher servers control lower servers
 ![](lec3/lec31.png)
 
 ### Name server Zones:
-####Zones:
+#### Zones:
 - DNS namespace is dicided into *non-overlapping zones*. The servers are authoritative *for that zone*
 - Name servers are arranged in *hierarchical manner* extending from a set of *root servers*
 
-####Root Name Servers:
+#### Root Name Servers:
 - The root servers form an *authoritative cluster for enquiries*. The root servers are *contacted* by a *local name server that cannot resolve the name*.
 - If you are lost you end up here.
 - They only handle top level stuff -> throw stuff to the next DNS server down since they are handling **millions (and billions and billions)** of requests every second.
 - There are **13 root servers globally** (a root server may be a cluster of servers in IP space)
 	- e.g. F-ROOT 13 servers; J-ROOT 8 servers 
 
-###Types of Name servers:
+### Types of Name servers:
 - Top level Domain DNS servers:
 	- Responsible for com, org, net, edu
 	- *All top level country domains*
@@ -98,8 +98,8 @@ Higher servers control lower servers
 	- It's just caching and forwarding queries - a proxy
 	- Typically each ISP has a "default name server" which handles DNS queries
 
-####Example:
-####A resolver client asks the local DNS for the domain to IP Mapping:
+#### Example:
+#### A resolver client asks the local DNS for the domain to IP Mapping:
 - If the answer is known by the local DNS, then it sends the answer.
 - IF the answer is *not known*, then the local DNS queries *up the hierarchy* to the *top level (root) DNS for the domain* and then relays the answer to the resolver client.
 
@@ -112,7 +112,7 @@ If you misconfigure your DNS you can result in a infinite loop
 *Example of an Iterative Query*
 ![](lec3/lec32.png)
 
-###Resource Records:
+### Resource Records:
 
 ![](lec3/lec33.png)
 
@@ -122,7 +122,7 @@ This creates problems if they are the same - web domain and mail domain at the s
 SPF - mitigates spam by automatically marking spam-domains as junk
 TXT - Usually nowadays used for authentication
 
-####Some DNS query tools:
+#### Some DNS query tools:
 - nslookup - Internal resolver - not using the OS
 	- Can see completely different resolver come back as opposed to the OS one (ignores the OS) - useful if your OS is incorrectly set up
 - dig - OS resolver
@@ -140,11 +140,11 @@ TXT - Usually nowadays used for authentication
 
 ![](lec3/lec34.png)
 
-####No security in original design:
+#### No security in original design:
 - DNS spoofing
 - DNS flooding
 
-####Solutions:
+#### Solutions:
 - DNSSEC
 - Root signing
 
@@ -155,11 +155,11 @@ Doesn't really work until all resolvers have it.
 Has a long history (old boi) - lots of standards
 
 Only need to be aware of:
-####Standards for internet enabled email are based on 2 RFC's
+#### Standards for internet enabled email are based on 2 RFC's
 - RFC 821 (transmission)
 - RFC 822 (message format)
 
-####Architecture and services
+#### Architecture and services
 - User agents
 	- Allow user to read and send email
 - Message transfer agents
