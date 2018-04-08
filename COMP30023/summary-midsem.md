@@ -14,7 +14,7 @@
     - [SMTP](#email-and-smtp-simple-message-transfer-protocol)
 - [Transport Layer](#transport-layer-tcpudp)
     - [UDP](#udp---user-datagram-protocol)
-    - [TCP](#tcp---transmission-control-protocol)
+    - [TCP](#tcp---transmission-connection-protocol)
 - [Processes and Threads](#socket-programming-and-threading)
 - [Memory Management](#memory-management)
 - [Version Control](#version-control-systems)
