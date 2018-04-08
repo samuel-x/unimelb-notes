@@ -60,19 +60,19 @@ Don't need to remember this exactly, but it is a good way to visualise it
 
 ### Sockets in C
 **Headers**
-```
+``` C
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>			// Interfaces to use
 ```
 **Variables**
-```
+``` C
 int listenfd = 0, connfd = 0;
 char sendBuff[1025]; 			// send buffer
 struct sockaddr_in serv_addr;	// Server address
 ```
 **Create a socket**
-```
+``` C
 // Listen file descriptor
 // AF_INET specifies you're communicating over internet
 // AF_UNIX would specify communicating same machine
@@ -92,12 +92,12 @@ serv_addr.sin_port = htons(5000); //Listen on port 5000
 
 The process:
 **Bind and listen**
-```
+``` C
 bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 listen(listenfd, 10) // maximum number of client connections to queue
 ```
 **Accept, Send, Close**
-```
+``` C
 // Use same file descriptor
 connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
 
@@ -109,11 +109,11 @@ write(connfd, sendBuff, strlen(sendBuff));
 close(connfd);
 ```
 **Connect**
-```
+``` C
 connect(connfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)
 ```
 **Receive**
-```
+``` C
 while ( (n = read(connfd, recvBuff, sizeof(recvBuff)-1)) > 0)
 {
 //process received buffer
@@ -155,7 +155,7 @@ If youre doing threads then you can treat each thread as a representation for pr
 - All threads have type -lpthread
 
 **Creating a thread**
-```
+``` C
 int pthread_create(pthread_t *id,
 const pthread_attr_t *attr,
 void *(func)(void *),
@@ -164,7 +164,7 @@ Id of thread itself:
 pthread_t pthread_self();
 ```
 **Terminate a thread:**
-```
+``` C
 void pthread_exit(void *rval_ptr);
 int pthread_cancel(pthread_t tid);
 // Get the return value of a thread and then close that and start one
@@ -172,7 +172,7 @@ int pthread_join(pthread_t tid, void **rval_ptr);
 ```
 **Causes the current thread to wait until the specified thread has
 terminated.**
-```
+``` C
 int pthread_detach(pthread_t tid);
 ```
 **Causes the thread resources to be reclaimed immediately upon
