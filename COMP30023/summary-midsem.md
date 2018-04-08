@@ -10,10 +10,14 @@ Computer Systems Mid-Sem Summary Notes (Week 1-6)
 Contents (in order specified in the recap) :book:
 -------------------------------------------------
 
+-   [Network Models](#network-models)
+    -   [Connection Oriented vs
+        Connectionless](#connection-oriented-vs-connectionless)
+    -   [TCP/IP vs OSI](#tcpip-vs-osi)
 -   [Application Layer](#application-layer)
+    -   [What's in a URL? (Uniform Resource
+        Locator)](#whats-in-a-url-uniform-resource-locator)
     -   [How HTTP works](#how-http-works)
-    -   [Client and Server Side
-        Processing](#client-and-server-side-processing)
     -   [Web Proxies](#web-proxies)
     -   [Dynamic/Static Web Documents](#dynamicstatic-web-documents)
     -   [DNS: Domain Name System](#dns-domain-name-system)
@@ -22,6 +26,10 @@ Contents (in order specified in the recap) :book:
         -   [DNS tools](#dns-tools)
     -   [Email and SMTP (Simple Message Transfer
         Protocol)](#email-and-smtp-simple-message-transfer-protocol)
+        -   [User Agents](#user-agents)
+        -   [Message Transfer Agents](#message-transfer-agents)
+        -   [SMTP](#smtp)
+        -   [Delivery Methods](#delivery-methods)
         -   [MIME - Multipurpose Internet Mail
             Extensions](#mime---multipurpose-internet-mail-extensions)
         -   [Streaming](#streaming)
@@ -30,9 +38,12 @@ Contents (in order specified in the recap) :book:
     -   [Ports and Addressing](#ports-and-addressing)
     -   [Multiplexing/demultiplexing](#multiplexingdemultiplexing)
 -   [UDP - User Datagram Protocol](#udp---user-datagram-protocol)
+    -   [Pros of UDP](#pros-of-udp)
+    -   [Cons of UDP](#cons-of-udp)
     -   [RPC and RTP](#rpc-and-rtp)
 -   [TCP - Transmission Connection
     Protocol](#tcp---transmission-connection-protocol)
+    -   [Service Model](#service-model)
     -   [TCP Features](#tcp-features)
     -   [TCP properties](#tcp-properties)
     -   [The Process](#the-process)
@@ -65,73 +76,103 @@ Contents (in order specified in the recap) :book:
 
 `good luck and godspeed fams` :muscle:
 
-  ------------------------------------------------------
-  \# Network Models
+------------------------------------------------------------------------
 
-  In this course we'll be looking at the network as a
-  *stack of layers* <sub>networks have layers</sub>
+Network Models
+==============
 
-  Each layer gives stuff to the layer above or to other
-  layers on the same layer.
+In this course we'll be looking at the network as a *stack of layers*
+<sub>networks have layers</sub>
 
-  The services that go to higher layers are called
-  *interfaces or services* while communication between
-  layers of the same depth are called *protocols*.
+Each layer gives stuff to the layer above or to other layers on the same
+layer.
 
-  A service can be ***connection oriented*** or
-  ***connectionless***. - **Connection Oriented
-  (e.g. TCP)** - Connect, Use, Disconnect - e.g. it's
-  like talking to a normal person - start convo -\>
-  topic -\> kbye lol - **Connectionless (e.g. UDP)** -
-  Just send it™ - Kinda like a postal service except we
-  don't really know if the message will ever get there -
-  This has an impact on how *reliable* a service can be.
+The services that go to higher layers are called *interfaces or
+services* while communication between layers of the same depth are
+called *protocols*.
 
-  \#\#\# TCP/IP vs OSI In the beginning of internets,
-  there were a bunch of models.
+A service can be ***connection oriented*** or ***connectionless***.
 
-  Some people wanted to implement heaps and make a
-  really nice and long spec for a network. They were
-  never adopted cause *they were too slow*. **This is
-  the OSI model**.
+##### Connection Oriented vs Connectionless
 
-  The **TCP/IP model is the other model**. It's *jank
-  af* but it was adopted first, because it was made
-  earlier.
+-   **Connection Oriented (e.g. TCP)**
+    -   Connect, Use, Disconnect
+    -   e.g. it's like talking to a normal person
+        -   start convo -\> topic -\> kbye lol
+-   **Connectionless (e.g. UDP)**
+    -   Just send it™
+    -   Kinda like a postal service except we don't really know if the
+        message will ever get there
+-   This has an impact on how *reliable* a service can be.
 
-  **OSI is the ideal peak performance** - Use it to make
-  the ideal network model
+### TCP/IP vs OSI
 
-  TCP/IP is just what we happen to use cause it was
-  there first - Use this when actually making something
+In the beginning of internets, there were a bunch of models.
 
-  <sub>kinda sounds like my marks</sub>
+Some people wanted to implement heaps and make a really nice and long
+spec for a network. They were never adopted cause *they were too slow*.
+**This is the OSI model**.
 
-  \#\#\#\# OSI Model Layers - Application - Stuff you
-  interact with - TELNET, FTP, SMTP, DNS - Presentation
-  - Encoding stuff (unicode, languages etc.) - Session -
-  HTTP Sessions? - Transport - TCP/UDP - And 3 more
-  layers which are used to connect - Network - IP - Data
-  link + Phyical - LAN, ARPANET, SATNET, Radio
+The **TCP/IP model is the other model**. It's *jank af* but it was
+adopted first, because it was made earlier.
 
-  \#\#\#\# TCP/IP Model Layers - Application - Stuff you
-  interact with - This basically now *also tries* to do
-  all the stuff in the *presentation and session layers*
-  - TELNET, FTP, SMTP, DNS - Transport - TCP/UDP - And 2
-  more layers which are used to connect - Network - IP -
-  Host-To-Network - LAN, ARPANET, SATNET, Radio
+**OSI is the ideal peak performance** - Use it to make the ideal network
+model
 
-  **This is how the model works**
-  ![](summary-midsem/summary-midsem0.png)
-  ------------------------------------------------------
+TCP/IP is just what we happen to use cause it was there first - Use this
+when actually making something
+
+<sub>kinda sounds like my marks</sub>
+
+#### OSI Model Layers
+
+-   Application
+    -   Stuff you interact with
+    -   TELNET, FTP, SMTP, DNS
+-   Presentation
+    -   Encoding stuff (unicode, languages etc.)
+-   Session
+    -   HTTP Sessions?
+-   Transport
+    -   TCP/UDP
+-   And 3 more layers which are used to connect
+    -   Network
+        -   IP
+    -   Data link + Phyical
+        -   LAN, ARPANET, SATNET, Radio
+
+#### TCP/IP Model Layers
+
+-   Application
+    -   Stuff you interact with
+    -   This basically now *also tries* to do all the stuff in the
+        *presentation and session layers*
+    -   TELNET, FTP, SMTP, DNS
+-   Transport
+    -   TCP/UDP
+-   And 2 more layers which are used to connect
+    -   Network
+        -   IP
+    -   Host-To-Network
+        -   LAN, ARPANET, SATNET, Radio
+
+**This is how the model works** ![](summary-midsem/summary-midsem0.png)
+
+------------------------------------------------------------------------
 
 Application Layer
 =================
 
 Application layer is where cool stuff happens.
 
-**What's in a URL? (Uniform Resource Locator)** - Protocol - WWW - DNS
-Name - google.com - File Name - /fish.html
+##### What's in a URL? (Uniform Resource Locator)
+
+-   Protocol
+    -   WWW
+-   DNS Name
+    -   google.com
+-   File Name
+    -   /fish.html
 
 Address for a resource can be *relative (./folder1/fish.html)* or
 *absolute (https://www.google.com)*
@@ -150,7 +191,7 @@ disconnect/reconnect in order to load a webpage. Nowadays we have
 pipelining and caching and persistent connections and shit (1.1
 onwards).
 
-**There are many methods used in HTTP:**
+##### Methods used in HTTP
 
     Method          | Safe              | Idempotent        | Cacheable
     GET             | Y                 | Y                 | Y
@@ -167,7 +208,7 @@ Idempotent - multiple identical requests have same effect
 
 Safe - only for information retrieval - shouldn't change state
 
-**Example of a ASCII Request/Response**
+##### Example of a ASCII Request/Response
 
     // Here's a request
     GET /somedir/page.html HTTP/1.1         // Request line (GET, POST, HEAD)
@@ -187,7 +228,7 @@ Safe - only for information retrieval - shouldn't change state
 
     <html>...                               // Data
 
-**HTTP Response Codes**
+##### HTTP Response Codes
 
     1xx     | Information       | 100 - Agrees to handle client's request
     2xx     | Success           | 200 = request succeeeded; 204 = no content
@@ -195,19 +236,29 @@ Safe - only for information retrieval - shouldn't change state
     4xx     | Client error      | 404 gf and internship not found 😭
     5xx     | Server error      |
 
-#### Client and Server Side Processing
+##### Client Side Processing
 
-**Client** - Doesn't really have much to process beyond webpages -
-Plugins/Extensions - Integrated software modules which executes in the
-browser - Javascript - Helper - Seprate program which can instantiated
-by the browser - Applications/pdf
+-   Doesn't really have much to process beyond webpages
+-   Plugins/Extensions
+    -   Integrated software modules which executes in the browser
+    -   Javascript
+-   Helper
+    -   Seprate program which can instantiated by the browser
+    -   Applications/pdf
 
-**Server** Five step process: - Accept connection - Identify the file
-requested - Perform access control - Check cache - Get the file from
-local disk storage and other processing - Send file to client - Close
-connection - Maybe make an entry in the server log if you want - Except
-do all of the above in multiple threads otherwise things would be slow
-af :turtle:
+##### Server Side Processing
+
+-   Five step process:
+    -   Accept connection
+    -   Identify the file requested
+        -   Perform access control
+        -   Check cache
+    -   Get the file from local disk storage and other processing
+    -   Send file to client
+    -   Close connection
+        -   Maybe make an entry in the server log if you want
+    -   Except do all of the above in multiple threads otherwise things
+        would be slow af :turtle:
 
 Cache = basically reduce response time by just retrieving version of
 data in memory instead of disk
@@ -220,9 +271,11 @@ data in memory instead of disk
     -   "Can you ask this person to give me this?"
     -   Organisations all usually have a proxy set up
 
-**Cookies** - Small amount of information placed on user's computer and
-re-used - Has 5 fields: domain, path, content, expiry, security - Used
-to track users and the kind of weird kinky shit you look at
+##### Cookies
+
+-   Small amount of information placed on user's computer and re-used
+-   Has 5 fields: domain, path, content, expiry, security
+-   Used to track users and the kind of weird kinky shit you look at
 
 e.g.
 
@@ -235,41 +288,75 @@ Here are some formats:
 
 ##### Static
 
-**HTML - Hypertext Markup Language** - Simple af - plain text with
-browser based rendering - Restricted to ISO-8859 Latin-1 Character Set -
-structural divisions (divs) - probably only drinks black coffee - has a
-stable job - under appreciated by everyone - likes listening to
-chiptunes
+###### HTML - Hypertext Markup Language
+
+-   Simple af
+-   plain text with browser based rendering
+-   Restricted to ISO-8859 Latin-1 Character Set
+-   structural divisions (divs)
+-   probably only drinks black coffee
+-   has a stable job
+-   under appreciated by everyone
+-   likes listening to chiptunes
 
 Note: HTML 5.0 now has things like built in standard for video etc.
 
-**XML and XSL** - basic af - Usually just used to separate content -
-wanted to be cooler than html but is actually way lamer - a e s t h e t
-i c - vapes a lot
+###### XML and XSL
 
-**XHTML** - Expression of HTML 4.0 as valid XML - Different to HTML 4.0
-since it has more requirements for conformance/stuff - literally who -
-can't decide what to order at maccas - wants attention - failed college
+-   basic af
+-   Usually just used to separate content
+-   wanted to be cooler than html but is actually way lamer
+-   a e s t h e t i c
+-   vapes a lot
+
+###### XHTML
+
+-   Expression of HTML 4.0 as valid XML
+-   Different to HTML 4.0 since it has more requirements for
+    conformance/stuff
+-   literally who
+-   can't decide what to order at maccas
+-   wants attention
+-   failed college
 
 ##### Dynamic
 
 Usually scripts which run in the web browser process Allows you to
 change parts of a page instead of requesting a new page
 
-**Javascript** - broken inside - instagram page with 1 mil followers -
-carries the team
+###### Javascript
 
-**Java Applets** - Compiled java code - old af - tries too hard - no
-idea what blockchain means
+-   broken inside
+-   instagram page with 1 mil followers
+-   carries the team
 
-**ActiveX** - retired - really likes windows in their house - no-one
-cares anymore
+###### Java Applets
 
-**AJAX** - used a lot - stressed - never in sync with the group - doesnt
-like attention
+-   Compiled java code
+-   old af
+-   tries too hard
+-   no idea what blockchain means
 
-**HTML and CSS** - present information as "pages" - OG - hipsters before
-hipsters existed - cool - smokes a lot and drives an 80's mustang
+###### ActiveX
+
+-   retired
+-   really likes windows in their house
+-   no-one cares anymore
+
+##### AJAX
+
+-   used a lot
+-   stressed
+-   never in sync with the group
+-   doesnt like attention
+
+###### HTML and CSS
+
+-   present information as "pages"
+-   OG
+-   hipsters before hipsters existed
+-   cool
+-   smokes a lot and drives an 80's mustang
 
 DNS: Domain Name System
 -----------------------
@@ -307,7 +394,9 @@ This image makes things a lot easier
 
 At the very top you have a *root name server*. There are 13 in the world
 and you only end up here if you're lost. These only handle top level
-stuff and push requests down. - Literally the internet
+stuff and push requests down.
+
+-   Literally the internet
 
 #### Types of Name Servers:
 
@@ -338,18 +427,31 @@ resolvers have it
 Email and SMTP (Simple Message Transfer Protocol)
 -------------------------------------------------
 
-**User Agents** - Allow users to read/send email **Message Transfer
-Agents** - Transport messages source-\>destination
+##### User Agents
 
-**SMTP** - Use TCP to reliably transfer email message (port 25) - Direct
-transfer - WhatsApp uses this - Default not secure as it has no
-authentication (mitigated by HTTPS)
+    - Allow users to read/send email
 
-Delivery Methods: - Local - **POP3**: Post Office Protocol - Removes
-message from server once it's downloaded - **IMAP**: Internet Mail
-Access Protocol - More features and more complex - Can manipulate stored
-messages - Doesn't scale well - **HTTP**: Gmail, Hotmail, Yahoo! Mail,
-10minutemail etc.
+##### Message Transfer Agents
+
+    - Transport messages source->destination
+
+##### SMTP
+
+-   Use TCP to reliably transfer email message (port 25)
+-   Direct transfer
+    -   WhatsApp uses this
+-   Default not secure as it has no authentication (mitigated by HTTPS)
+
+##### Delivery Methods
+
+-   Local
+-   **POP3**: Post Office Protocol
+    -   Removes message from server once it's downloaded
+-   **IMAP**: Internet Mail Access Protocol
+    -   More features and more complex
+    -   Can manipulate stored messages
+    -   Doesn't scale well
+-   **HTTP**: Gmail, Hotmail, Yahoo! Mail, 10minutemail etc.
 
 #### MIME - Multipurpose Internet Mail Extensions
 
@@ -363,13 +465,18 @@ messages - Doesn't scale well - **HTTP**: Gmail, Hotmail, Yahoo! Mail,
 
 #### Streaming
 
-VoIP (Voice Over IP) - Prioritises low latency
+VoIP (Voice Over IP)
 
-Video/Audio - Live: same as VoIP - Stored: Balance between quality and
-latency; initial buffering is acceptable (Vimeo/YT)
+-   Prioritises low latency and small buffer since it's just voice data
 
-SIP, RTMP, RTSP/RTP, HLS, MPEG-DASH \<- No idea what these are but some
-more examples
+Video/Audio
+
+-   Live: same as VoIP
+-   Stored: Balance between quality and latency; initial buffering is
+    acceptable (Vimeo/YT)
+
+SIP, RTMP, RTSP/RTP, HLS, MPEG-DASH \<- Some more examples (probably
+won't be tested)
 
 Usually you should stream live in UDP (no buffering, less resource
 intensive), stream stored video in TCP (good quality, buffering)
@@ -388,15 +495,19 @@ Transport Layer UDP/TCP
 
 ![](lec5/lec50.png)
 
-**Encapsulation** - When you send a message *down a layer* you
-*encapsulate it* in the next unit. - When it arrives each unit is
-*peeled off*
+##### Encapsulation
+
+-   When you send a message *down a layer* you *encapsulate it* in the
+    next unit.
+-   When it arrives each unit is *peeled off*
 
 ![](lec5/lec51.png)
 
-**Terminology Used in this Course:** - Segments = sent at transport
-layer - Packets = sent at the internet/network layer - Frames = sent at
-the link/data link layer
+###### Terminology Used in this Course
+
+-   Segments = sent at transport layer
+-   Packets = sent at the internet/network layer
+-   Frames = sent at the link/data link layer
 
 #### Ports and Addressing
 
@@ -405,10 +516,17 @@ the link/data link layer
     -   This is like an apartment number
     -   Building is the host, port is the specific apt. number
 
-**Port Allocations** - Range from 0-65535 (8 bits) - Classified in 3
-segments: - Well known ports (0-1023) - 80 HTTP - 25 SMTP - 22 SSH -
-Registered Ports (1024-49151) - Dynamic Ports (49152-65535) - Listening
-for responses
+##### Port Allocations
+
+-   Range from 0-65535 (8 bits)
+-   Classified in 3 segments:
+    -   Well known ports (0-1023)
+        -   80 HTTP
+        -   25 SMTP
+        -   22 SSH
+    -   Registered Ports (1024-49151)
+    -   Dynamic Ports (49152-65535)
+        -   Listening for responses
 
 #### Multiplexing/demultiplexing
 
@@ -429,26 +547,43 @@ UDP - User Datagram Protocol
 -   Simple header - data from source to dest with particular port
 -   Used over raw IP since *you can specify ports for data to arrive at*
 
-**Pros of UDP** - Provides IP interface with multiplexing/demultiplexing
-- Simple and efficient - Short request and short response - Simple to
-code - fewer messages - DNS is a good application for UDP
+##### Pros of UDP
 
-**Cons of UDP** - Does *not* include support for - flow control - error
-control - retransmission - Unreliable
+-   Provides IP interface with multiplexing/demultiplexing
+-   Simple and efficient
+-   Short request and short response
+-   Simple to code - fewer messages
+-   DNS is a good application for UDP
+
+##### Cons of UDP
+
+-   Does *not* include support for
+    -   flow control
+    -   error control
+    -   retransmission
+-   Unreliable
+
+**RPC (remote procedure calls)** and **RTP (real time transport
+protocol)** are two good use cases for UDP
 
 #### RPC and RTP
 
-**RPC (remote procedure calls)** and **RTP (real time transport
-protocol)** are two good use cases for UDP - RPC - Allows calling
-procedures on a remote server as if they are local - Makes distributed
-programming easier - UDP is good for this as it's idempotent - RTP -
-Used by VoIP (voice over IP) - Runs in user space and application layer
-but uses parts of transport layer (pick one for exam) - Example of
-TCP/IP not being strongly modelled - MUX several streams into single
-stream of UDP segments - Controlled by Real-timeTransport Control
-Protocol - Provides feedback to source - Synchronisation (clocks
-drifting) - UI (e.g. naming sources) - Uses a buffer to counter jitter
-and other issues
+-   RPC
+    -   Allows calling procedures on a remote server as if they are
+        local
+    -   Makes distributed programming easier
+    -   UDP is good for this as it's idempotent
+-   RTP
+    -   Used by VoIP (voice over IP)
+    -   Runs in user space and application layer but uses parts of
+        transport layer (pick one for exam)
+        -   Example of TCP/IP not being strongly modelled
+    -   MUX several streams into single stream of UDP segments
+    -   Controlled by Real-timeTransport Control Protocol
+        -   Provides feedback to source
+        -   Synchronisation (clocks drifting)
+        -   UI (e.g. naming sources)
+    -   Uses a buffer to counter jitter and other issues
 
 TCP - Transmission Connection Protocol
 ======================================
@@ -467,9 +602,12 @@ TCP - Transmission Connection Protocol
     -   much spaghetti
     -   allergies to shellfish
 
-**Service Model** - The sender/receiver both create **sockets** with the
-*IP of the host and the port* - TCP service activates when connections
-are established between sockets
+##### Service Model
+
+-   The sender/receiver both create **sockets** with the *IP of the host
+    and the port*
+    -   TCP service activates when connections are established between
+        sockets
 
 #### TCP Features
 
@@ -504,36 +642,51 @@ are established between sockets
 
 ### The Process
 
-**At the Start:** :smile: - Both windows initialised - 3-way handshake
-already done - Synchronized af boi
+##### At the Start :smile:
 
-**Sending stuff:** :speech\_balloon: - Bytes are loaded into the send
-window 'buffer' and these are called *in flight* - Send an ACK for a
-segment and the window size to the receiver - These bytes will be read
-by application - An ACK is sent back to sender *(may be out of order)*
+-   Both windows initialised
+-   3-way handshake already done
+-   Synchronized af boi
+
+##### Sending stuff :speech\_balloon:
+
+-   Bytes are loaded into the send window 'buffer' and these are called
+    *in flight*
+-   Send an ACK for a segment and the window size to the receiver
+-   These bytes will be read by application
+-   An ACK is sent back to sender *(may be out of order)*
 
 ![](lec9/lec92.png)
 
-**Moving to the next segment:** :muscle: - Remove the first socket -
-Slide along the receiver window - Next byte received - same ACK process
-done again - Sender *still has less bytes for window size* - This
-*variable window size* allows for a different number of bytes to be read
-for each segment - The sender *may send a window size update* - The
-sender window **must always be in sync with the receiver** and *the same
-size* or *slightly smaller*
+##### Moving to the next segment :muscle:
+
+-   Remove the first socket
+-   Slide along the receiver window
+-   Next byte received - same ACK process done again
+-   Sender *still has less bytes for window size*
+    -   This *variable window size* allows for a different number of
+        bytes to be read for each segment
+-   The sender *may send a window size update*
+-   The sender window **must always be in sync with the receiver** and
+    *the same size* or *slightly smaller*
 
 ![](lec9/lec91.png)
 
-**Oh no! We lost a segment!:** :scream: - Keep sending the later
-segments cause we don't notice ![](lec9/lec93.png) - Eventually receiver
-window *keeps sending an ACK for the previous segment* so the sender
-window stops and does a *fast retransmit* - This previous ACK is called
-a *DupACK (Duplicate Acknowledgement)* - *3 DupACKS = fast retransmit* -
-If there's still other segments in the network we let them turn up
-before our resend ![](lec9/lec94.png) - Fast retransmit is just
-resending some shit - The latest ACK will have the newest byte value so
-we can go back up to where we were (sender window size should be 0 so
-again *don't send anything*)
+##### Oh no! We lost a segment! :scream:
+
+-   Keep sending the later segments cause we don't notice
+    ![](lec9/lec93.png)
+-   Eventually receiver window *keeps sending an ACK for the previous
+    segment* so the sender window stops and does a *fast retransmit*
+    -   This previous ACK is called a *DupACK (Duplicate
+        Acknowledgement)*
+    -   *3 DupACKS = fast retransmit*
+    -   If there's still other segments in the network we let them turn
+        up before our resend ![](lec9/lec94.png)
+-   Fast retransmit is just resending some shit
+-   The latest ACK will have the newest byte value so we can go back up
+    to where we were (sender window size should be 0 so again *don't
+    send anything*)
 
 ![](lec9/lec95.png)
 
@@ -542,11 +695,15 @@ again *don't send anything*)
     -   The process is initiated when a window update is sent back and
         we'll start sending things again ![](lec9/lec96.png)
 
-**Persist Timer**: - The sender will just wait when it receives a 0 size
-window until the timer is up - After the timer is up it'll send a probe
-"pls notice me senpai" to the receiver window - This should nudge the
-receiver window with a *ZeroWindowProbe* and the receiver should reply
-with a windowUpdate and a *ZeroWindowProbeACK*
+##### Persist Timer
+
+-   The sender will just wait when it receives a 0 size window until the
+    timer is up
+-   After the timer is up it'll send a probe "pls notice me senpai" to
+    the receiver window
+    -   This should nudge the receiver window with a *ZeroWindowProbe*
+        and the receiver should reply with a windowUpdate and a
+        *ZeroWindowProbeACK*
 
 ### Congestion Control
 
@@ -575,11 +732,15 @@ Socket Programming and Threading
 -   Allows you to traverse from host application -\> kernel code -\>
     HW/FW
 
-Connecting with sockets: 1. Instantiate Socket() 2. Bind your ports with
-Bind() - Specifies if this is for just local stuff or interwebs (note
-this depends on what you're doing) 3. Listen() puts it into a state
-which makes it wait and block until someone connects 4. Accept() accepts
-the connection which triggers the connection (3-way handshake)
+##### Connecting with sockets:
+
+1.  Instantiate Socket()
+2.  Bind your ports with Bind() - Specifies if this is for just local
+    stuff or interwebs (note this depends on what you're doing)
+3.  Listen() puts it into a state which makes it wait and block until
+    someone connects
+4.  Accept() accepts the connection which triggers the connection (3-way
+    handshake)
 
 ### Socket Primitives
 
@@ -621,13 +782,18 @@ idetity but is allowed to give data structutres to parent
 
 `not going to talk about pthreads either since that's just a POSIX standard and more code stuffs - look at lec8 for more`
 
-Global variables are *shared across threads* - This results in any
-thread being *ablel to modify shared data* at any time - Need to
-synchonize threads (as they should all be aware of this change in data)
-- Multithreaded is really hard to do correctly - as it's
-non-determiinistic - Running a program twice can result in different
-values - Normal testing doesn't really work - Way more theoretical
-modelling - No corrupted states etc.
+Global variables are *shared across threads*
+
+-   This results in any thread being *ablel to modify shared data* at
+    any time
+-   Need to synchonize threads (as they should all be aware of this
+    change in data)
+-   Multithreaded is really hard to do correctly - as it's
+    non-determiinistic
+-   Running a program twice can result in different values
+-   Normal testing doesn't really work
+-   Way more theoretical modelling
+    -   No corrupted states etc.
 
 ### Multithreaded Programming Shortcomings
 
@@ -694,8 +860,10 @@ Memory Management
 -   Technically a blue screen is an interrupt
 -   Only caused by hardware
 
-**Pseudo Interrupt** - Software calls - Division by zeros / exceptions /
-acting weirdly
+#### Pseudo Interrupt
+
+-   Software calls
+-   Division by zeros / exceptions / acting weirdly
 
 ### Swapping
 
@@ -714,14 +882,20 @@ acting weirdly
 -   Now you can have a program larger than the amount of available RAM
 -   Done with *Paging* or *Segmentation*
 
-**Paging** - Addresses generated by programs are *virtual* - The
-*virtual addresses* are then *mapped to physical addresses* - This is
-managed by the *MMU* or Memory Management Unit - Mapped in a *page
-table* - Contains page number, valid but, referenced bit, modified bit,
-read/write/exec permission bits - When permissions are *violated* there
-is a *page fault* which will terminate the process - If not valid bit -
-Suspend process, free page frame, load required page, map it and restart
-the process - basically turn it off and on again
+#### Paging
+
+-   Addresses generated by programs are *virtual*
+-   The *virtual addresses* are then *mapped to physical addresses*
+-   This is managed by the *MMU* or Memory Management Unit
+    -   Mapped in a *page table*
+        -   Contains page number, valid but, referenced bit, modified
+            bit, read/write/exec permission bits
+    -   When permissions are *violated* there is a *page fault* which
+        will terminate the process
+    -   If not valid bit
+        -   Suspend process, free page frame, load required page, map it
+            and restart the process
+        -   basically turn it off and on again
 
 ------------------------------------------------------------------------
 
@@ -737,18 +911,29 @@ same files/directories?
 You could try shouting across the office (goes bad as soon as there's
 more than 3 people)
 
-So we have Version Control Systems! - Track and control changes over
-files - Collaborate - See revision history - Audit changes - Backup?
-(it's not a great idea to put it on github since you can destroy it
-accidentally) - Take over the world (probably)
+So we have Version Control Systems!
 
-2005/2006 - Git by the legend Linus Torvalds - **Made in 10 days** -
-Takes CVS as an example of what *not* to do - Supports a distributed
-workflow - Includes *very strong safeguards* against corruption either
-accidental - Some strange design choices since it was mdae in 2005/2006
-in 10 days by linus himself - Huge number of commands - Reputation for
-being difficult - Andrew Morton said Git is "expressly designed to make
-you feel less intelligent than you thought you were".
+-   Track and control changes over files
+-   Collaborate
+-   See revision history
+-   Audit changes
+-   Backup? (it's not a great idea to put it on github since you can
+    destroy it accidentally)
+-   Take over the world (probably)
+
+2005/2006 - Git by the legend Linus Torvalds
+
+-   **Made in 10 days**
+-   Takes CVS as an example of what *not* to do
+-   Supports a distributed workflow
+-   Includes *very strong safeguards* against corruption either
+    accidental
+-   Some strange design choices since it was mdae in 2005/2006 in 10
+    days by linus himself
+-   Huge number of commands
+-   Reputation for being difficult
+-   Andrew Morton said Git is "expressly designed to make you feel less
+    intelligent than you thought you were".
 
 ### Git Architecture
 
@@ -815,11 +1000,13 @@ push to
     restricted or require code review prior to senior staff merging
     branches
 
-Binary files can be inefficient in git - Git automatically packs file
-changes using delta compression - The change is across the whole file so
-makes things like JPEGs getting copied over and over - Increases the
-size of the clone operation - Problem for game development - can do a
-"shallow clone"
+Binary files can be inefficient in git
+
+-   Git automatically packs file changes using delta compression
+-   The change is across the whole file so makes things like JPEGs
+    getting copied over and over
+-   Increases the size of the clone operation
+-   Problem for game development - can do a "shallow clone"
 
 ### Forks
 
@@ -843,19 +1030,23 @@ size of the clone operation - Problem for game development - can do a
     -   Rebuild the software and deploy it (see *Heroku deploying from
         GitHub*)
 
-Build processes that depend on external repositories are fragile - A
-user deletes the repository -\> build process breaks - Risk of unknown
-code changes in builds - e.g. npm relying on one small script that was
-deleted -\> had to re-release the original script without license
-permission -\> this is bad
+Build processes that depend on external repositories are fragile
+
+-   A user deletes the repository -\> build process breaks
+-   Risk of unknown code changes in builds
+-   e.g. npm relying on one small script that was deleted -\> had to
+    re-release the original script without license permission -\> this
+    is bad
 
 It's usually better to *fork the repository* - Higher support costs,
 since you need to pull changes - at least everything won't self destruct
 
-GitHub allows recreating deleted users - Serious security concern - can
-inject malicious code
+GitHub allows recreating deleted users
 
-Be careful what you store in public repositories - never store
-credentials/aws keys! (I've done this before oops)
+-   Serious security concern - can inject malicious code
+
+Be careful what you store in public repositories
+
+-   never store credentials/aws keys! (I've done this before oops)
 
 ------------------------------------------------------------------------
