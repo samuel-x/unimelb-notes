@@ -129,7 +129,7 @@ Sequence number - just a counter (allows reciever to know if it's lost a packet)
 
 Timestamp - you can figure out how far from the first packet you need to play this one
 
-Don't need to know the rest for exam
+**Don't need to know the rest for exam**
 
 ### Real-time Transport Control Protocol
 - Control Protocol for RTP

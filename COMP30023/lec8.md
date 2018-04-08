@@ -91,7 +91,7 @@ serv_addr.sin_port = htons(5000); //Listen on port 5000
 ```
 
 The process:
-**Bind abd listen**
+**Bind and listen**
 ```
 bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 listen(listenfd, 10) // maximum number of client connections to queue
@@ -131,20 +131,19 @@ Can change things like having mulltiple sockets - typically you want everything 
 
 ## Threads vs Processes
 - Threads are a sequential executation
-
-- Threads vs Donald Trmp
+- Threads vs Single Process
 ![](lec8/lec87.png)
 
-More threads = more danger/reliability issues but also more performande
+More threads = more danger/reliability issues but also more performance
 Threads are just sub-processes
 
 ### Kernel vs User Threads
-- Kernel threads operate at OS level,
-	- Scheduling
-- user threads operate with green using multi-threading
-- It's slow af
+- Kernel threads operate at OS level
+	- Have scheduling
+- user threads operate using multi-threading
+	- It's slow af
 
-diferent ways of represent itself
+diferent ways of representing itself
 
 ### Process and Threads
 If youre doing threads then you can treat each thread as a representation for processes
@@ -153,7 +152,7 @@ If youre doing threads then you can treat each thread as a representation for pr
 
 ### Pthreads
 - POSIX standard for API for thread and synchonisation. 
-- All threads have typ -lpthread
+- All threads have type -lpthread
 
 **Creating a thread**
 ```
@@ -183,9 +182,7 @@ termination.**
 Global variables are *shared across threads*
 - This results in any thread being *ablel to modify shared data* at any time
 - Need to synchonize threads (as they should all be aware of this change in data)
-
-
-- Multithreaded is really hard to do correctly - as it's non-determiinistic
+- Multithreaded is really hard to do correctly - as it's non-deterministic
 - Running a program twice can result in different values
 - Normal testing doesn't really work
 - Way more theoretical modelling

@@ -66,12 +66,12 @@ TCP connections are:
 		- will **not be examined**
 
 ### TCP Properties
-- Data exchanged is in segments
+- Data is exchanged in segments
 - Segment has a header of *20-60 bytes + Zero or more data bytes*
 - TCP Entities decide how large segments should be within 2 constraints, namely:
 	- 65515 byte IP payload
 	- Maximum Transfer Unit (MTU) - generally 1500 bytes
-		- <sub>probably an ERC20 token :thinking:</sub>  
+		- <sub>sounds like a new ERC20 token :thinking: time for an ICO anyone???</sub>  
 - *Sliding Window Protocol*
 	- to do with congestion and flow control
 	- Until the segment has been explicitly acknowledge it remains available to be restransmitted

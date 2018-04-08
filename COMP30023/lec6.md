@@ -90,7 +90,7 @@ Example: Process creation / control
 - runs off two assumptions:
 	- all the code/data of a program has to be in main memory when the program is running
 	- this code and data has to be stored in contiguous locations
-- With irtual memory, only some of the code and data of a program have to be in main memory: the parts needed now and the other parts when the program needs it
+- With virtual memory, only some of the code and data of a program have to be in main memory: the parts needed now and the other parts when the program needs it
 - Similarly different parts of the program can be loaded into different parts of memory, again without the program having to be aware of this.
 - The first point means that the size of a program can exceed the amount of available main memory
 - Very important in 60s/70s when RAM was real smol
@@ -133,7 +133,7 @@ It will then set the referenced bit, and if the access was a write it'll also se
 - If either condition isn't met, you'll get a page fault exception.
 
 ### Page Fault Handling
-- If othe page fault is caused byt he permissions being violated, the page fault handler will usually terminate the process.
+- The page fault is caused by the permissions being violated, the page fault handler will usually terminate the process.
 - Otherwise when the valid bit is zero, the OS must:
 	- Suspend the process,
 	- Free up a page frame
