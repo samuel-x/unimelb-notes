@@ -148,7 +148,7 @@ diferent ways of representing itself
 ### Process and Threads
 If youre doing threads then you can treat each thread as a representation for processes
 - Fork() creates a new process with it's own entirely new process context
-- Cline() : creates with it's own idetity but is allowed to give data structutres to parent
+- Clone() : creates with it's own idetity but is allowed to give data structutres to parent
 
 ### Pthreads
 - POSIX standard for API for thread and synchonisation. 
