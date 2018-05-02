@@ -86,6 +86,18 @@ Internet (80) <-> (5678) NAT in ROUTER <-> (1234) source)
 
 ### 4. Consider the example of BGP shown in the lectures (also given below) Figure 1: BGP Example
 #### (a) What is an Autonomous Sytem? What do A, B and C represent?
+- BGP -> Border Gateway Protocol 
+	- Handles routing between autonomous system
+	- Autonomous System = A subnetwork with the same administered organisation
+
+![](tut8/tut80.png)
 
 #### (b) As shown in the figure, a physical path exists between AS2 and AS3, as well as between AS3 and AS4. Can a packet sent from C with destination A be sent from AS4 to AS3 to AS2? Why or why not?
-
+- Autonomous systems are mostly belonging to one ISP
+- A, B, C are hosts/customers of the system
+- AS3 if it wants to send a packet to AS4 it'll send it to AS1 first
+- Usually if we don't have agreements we send it to the transport autonomous system (i.e. AS1)
+- Agreements between different autonomous systems if a lot of data passes through them
+	- Called a peering agreement - determined by network operators
+- You can't send packets from C to A with the AS4 to AS3 to AS2.
+	- Anything within AS3 for example will be advertised to only go to it's customers within AS3

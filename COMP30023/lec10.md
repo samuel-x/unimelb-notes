@@ -1,4 +1,4 @@
-# Computer Systems - Lecuture 11 (Week 6) - Internet (Network) Layer – IP Addresses and Packet Switching
+# Computer Systems - Lecuture 10 (Week 6) - Internet (Network) Layer – IP Addresses and Packet Switching
 
 ### The Internet (Network) Layer
 - Network Layer doesn't exist in TCP/IP but it does in OSI
