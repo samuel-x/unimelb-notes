@@ -1,4 +1,4 @@
-# COMP30023: Computer Systems Tutorial Week 11 and 12
+# COMP30023: Computer Systems Tutorial Week 11
 ### Certificates and PKI, TLS
 
 ### 1. What is a digital certificate?
