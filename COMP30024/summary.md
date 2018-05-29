@@ -10,6 +10,10 @@ Available in the ERC Library on reserve, 006.3 RUSS, or in the Co-op Bookshop.
 ```
 Textbook website: http://aima.cs.berkeley.edu/
 
+## The Turing Test
+- A human converses with a computer via a teletype
+- Aim is for the computer to *imitate a human well enough to fool someone*
+
 ## What is AI?
 ### The agent model:
 - The *agent model charcterises requirements for an agent* in terms of what it *perceives*, how it *acts*, its *environment* and its *performance measure (how well it does something)*.
