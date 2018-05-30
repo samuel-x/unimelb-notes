@@ -137,5 +137,3 @@ function SimpleProblemSolvingAgent(percept) returns an action
 		- **Search** -> find solution to problem
 	- **Action** -> solution from state and search
 	- *Return this action*
-
-

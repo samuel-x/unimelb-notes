@@ -219,10 +219,77 @@
 
 ## Week 6: Constraint Satisfaction Problems
 ##### Model a given problem as a CSP 
+- A *CSP* has **three main parts**.
+	- **_X_ set of _variables_**: {X<sub>1</sub>... X<sub>n</sub>}
+	- **_D_ set of _domains_ for _each variable_**: {D<sub>1</sub>...D<sub>n</sub>}
+	- **_C_ set of _constraints_ that must be fulfilled**
+		- Can be **unary** (itself), **binary** (2 variables) or **higher order/tertiary** constraints (multiple variables e.g. all different values)
+		- A *goal test* is defined by these constraints
+- Model a problem in terms of these:
+	- e.g. classic lecture scheduling problem
+	- X would be *lectures*
+	- D would be *times available*
+	- C would be *all times different for each lecture i.e. allDiff*
+
 ##### Demonstrate operation of CSP search algorithms 
-###### e.g., in what order are variables or values chosen using minimum remaining values, degree heuristic, least constraining value 
+- **Backtracking Search**
+	- Depth first search by assigning each domain value to each of variables
+		- Literally *takes forever*
+		- Ends up making _**n!d<sup>n</sup>**_ leaves! *Insanity.*
+- **Forward Checking**
+	- Whenever you **assign a variable**, **remove this value from any neighbours**	
+		- e.g. for the australia state colour problem:
+			- We assign *RED to WA*:
+			- ![](examrev/examrev0.png)
+			- This results in *RED being removed from NT and SA*
+			- Now we assign *GREEN to Q*:
+			- ![](examrev/examrev1.png)
+			- Continue till we _reach a point where there is **no domain left for a variable**_ 
+			- ![](examrev/examrev2.png)
+		- Complexity *depends on whatever order you check variables/values*
+- **Arc Consistency (AC-3)**
+	- **Start from a queue of arcs** and **check each node at each arc** whether they share any **values/domain in common**
+		- If they **do have a conflict**, **add all arcs from that node to the queue to check again later**
+		- **Keep going** until **the queue is empty** (i.e. the **graph is consistent** and **there are no conflicts**)
+	- *Time Complexity:* _**O(n<sup>2</sup>d<sup>3</sup>)**_
+		- Can be reduced to _**O(n<sup>2</sup>d<sup>2</sup>)**_ with a good heuristic/ordering
+
+###### e.g., in what order are variables or values chosen using minimum remaining values, degree heuristic, least constraining value
+- **Variable Ordering**
+	- **Minimum Remaining Values**
+		- Pick a variable **with the least number of remaining legal values (i.e. smallest domain left)**
+			- e.g. WA has *only RED left*, so we assign WA first
+				- *Reduces the number of choices for other variables*
+			- ![](examrev/examrev4.png)
+	- **Degree Heuristic**
+		- Pick the variable which **has the most number of constraints on other values**
+			- e.g. we start with SA since it constraints literally every other state lol
+			- ![](examrev/examrev5.png)
+			- Can be used as a tiebreaker for minimum remaining values
+- **Value Ordering**
+	- **Least Constraining Value**
+		- Pick the value for the variable **which removes the least number of values from its neighbours**
+		- ![](examrev/examrev3.png)
+
 ###### e.g., show how the domain of values of each variable are updated by forward checking, or arc consistency, where X → Y means using arc consistency to update domain of X so that for every value x ∈ X there is some allowed value y ∈ Y 
+- See above
+
 ##### Discuss and evaluate the properties of different constraint satisfaction techniques
+- **Tree Structured CSP**
+	- Make a variable a root node
+	- Go down the tree and apply `makeArcConsistent(Parent(Xj) Xj)` to all nodes
+	- If you're at the deepest point, assign X so that it is consistent with it's parents
+	- *Best Case Time Complexity*: Tree can be solved in _O(nd<sup>2</sup>)_ i.e. linear time
+	- *Worst Case Time Complexity*: _**O(d<sup>n</sup>)**_
+- **Nearly Tree Structured CSP**
+	- We can use **Cutset Conditioning**
+	- **Conditioning**: instantiate a *variable* and *prune its neighbours' domain* values
+	- **Cutset**: *set of variables that can be deleted* so constraint *graph forms a tree*
+	- **Cutset conditioning**: *instantiate (in all ways) a set of variables such that the remaining constraint graph is a tree*
+		- ![](examrev/examrev6.png)
+		- Then we can apply the above technique
+	- *Time Complexity*: where **c is the cutset size** -> _**O(d<sup>c</sup>(n-c)d<sup>2</sup>)**_
+
 
 ## Week 8: Making Complex Decisions
 ##### Compare and contrast different types of auctions 
@@ -256,20 +323,20 @@
 ##### Select the most appropriate type of auction for a given application 
 
 ## Week 9: Uncertainty
-- Calculate conditional probabilities using inference by enumeration 
-- Use conditional independence to simplify probability calculations 
-- Use Bayes’ rule for solving diagnostic problems 
-- Note: if the arithmetic is too complex to compute the exact final value then simplify the expression as best you can
+##### Calculate conditional probabilities using inference by enumeration 
+##### Use conditional independence to simplify probability calculations 
+##### Use Bayes’ rule for solving diagnostic problems 
+###### Note: if the arithmetic is too complex to compute the exact final value then simplify the expression as best you can
 
 ## Week 10: Bayesian Networks
-- Formulate a belief network for a given problem domain 
-- Derive expression for joint probability distribution for given belief network 
-- Use inference by enumeration to answer a query about simple or conjunctive queries on a given belief network 
+##### Formulate a belief network for a given problem domain 
+##### Derive expression for joint probability distribution for given belief network 
+##### Use inference by enumeration to answer a query about simple or conjunctive queries on a given belief network 
 
 ## Week 11: Robotics 
-- Determine the number of degrees of freedom of a robot, and whether it is holonomic 
-- Characterise sources of uncertainty in a robot application scenario 
-- Explain the basic concepts of localisation and mapping 
-- Formulate an application problem using incremental Bayes, and calculate posterior probabilities 
-- Model the configuration space for a simple robot 
-- Compare different approaches to motion planning given a particular configuration space 
+##### Determine the number of degrees of freedom of a robot, and whether it is holonomic 
+##### Characterise sources of uncertainty in a robot application scenario 
+##### Explain the basic concepts of localisation and mapping 
+##### Formulate an application problem using incremental Bayes, and calculate posterior probabilities 
+##### Model the configuration space for a simple robot 
+##### Compare different approaches to motion planning given a particular configuration space 
