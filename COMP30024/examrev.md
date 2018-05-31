@@ -89,7 +89,7 @@
 	- **Not Optimal Path**
 - **Uniform Cost Search**
 	- Expand least-cost node
-	- **Complete**
+	- **Complete if step size > 0**
 	- *Time:* **n nodes g cost <= optimal cost**
 	- *Space:* **n nodes g cost <= optimal cost**
 	- **Optimal**
@@ -131,7 +131,8 @@
 	- Similar to Uniform Cost search but evaluating distance from the goal
 	- **Complete**
 	- *Time:* **Exponential in [relative error in h * length of soln]**
-	- *Space:* **all nodes in memory**
+			- **Expands similarly to breadth first so O(b<sup>error\*d</sup>)**
+	- *Space:* **O(b<sup>d</sup>) all nodes in memory**
 		- **Optimal**
 
 ##### Don’t forget about iterative improvement algorithms
@@ -182,6 +183,7 @@
 	- Minimax but before every outcome you add a "chance node" which applies a probability to it
 	- Tree grows really fast
 	- As depth increases probability of reaching a node becomes diminished
+		- Means we care less about really *deep nodes*
 
 ## Week 5: Machine Learning in Game Search
 ##### Discuss opportunities for learning in game playing 
@@ -247,6 +249,7 @@
 			- Continue till we _reach a point where there is **no domain left for a variable**_ 
 			- ![](examrev/examrev2.png)
 		- Complexity *depends on whatever order you check variables/values*
+		- It could be _**O(d<sup>n</sup>)**_
 - **Arc Consistency (AC-3)**
 	- **Start from a queue of arcs** and **check each node at each arc** whether they share any **values/domain in common**
 		- If they **do have a conflict**, **add all arcs from that node to the queue to check again later**
@@ -279,8 +282,10 @@
 	- Make a variable a root node
 	- Go down the tree and apply `makeArcConsistent(Parent(Xj) Xj)` to all nodes
 	- If you're at the deepest point, assign X so that it is consistent with it's parents
-	- *Best Case Time Complexity*: Tree can be solved in _O(nd<sup>2</sup>)_ i.e. linear time
-	- *Worst Case Time Complexity*: _**O(d<sup>n</sup>)**_
+	- *Best Case Time Complexity*: Tree can be solved in _O(nd<sup>2</sup>)_ i.e. linear time 
+		- You **only need to take into account 2 nodes at any one time since removing a domain value from a node _will not impact its other children_ d<sup>2</sup>**
+		- If there *are loops* then you need to account for those with the below: 
+	- *Worst Case Time Complexity*: _**O(d<sup>n</sup>) i.e. Tree with Loops**_ 
 - **Nearly Tree Structured CSP**
 	- We can use **Cutset Conditioning**
 	- **Conditioning**: instantiate a *variable* and *prune its neighbours' domain* values
@@ -288,11 +293,32 @@
 	- **Cutset conditioning**: *instantiate (in all ways) a set of variables such that the remaining constraint graph is a tree*
 		- ![](examrev/examrev6.png)
 		- Then we can apply the above technique
-	- *Time Complexity*: where **c is the cutset size** -> _**O(d<sup>c</sup>(n-c)d<sup>2</sup>)**_
+	- *Time Complexity*: where **c is the cutset size** -> _**O(d<sup>c</sup>(n-c)d<sup>2</sup>) basically remove the variables which make the tree a loop with d<sup>n</sup> and then use the tree time complexity nd<sup>2</sup>**_
 
 
 ## Week 8: Making Complex Decisions
+
 ##### Compare and contrast different types of auctions 
+- Auctions have *3 main dimensions*:
+	- **Winner Determination**: Which bidder wins and what do they pay?
+		- *First price auctions*: highest bid is paid
+		- *Second-price auctions*: second highest bid is paid
+	- **Knowledge of Bids**:
+		- *Open cry*: Every bidder can see all bids from all other bidders
+		- *Sealed*: Every bidder can’t see the other bids
+	- **Order of bids**:
+		- *One-shot*: each bidder can only make one bid
+		- *Ascending*: each successive bid must exceed the previous bid
+		- *Descending*: start from a high price and go down and the first to bid wins
+- *Mechanism for an auction consists of*:
+	- a **language** to describe the allowable strategies an agent can follow
+	- a **communication protocol** for communicating *bids from bidders to the auctioneer*
+	- an **outcome rule**, used by auctioneer to *determine the outcome*
+		- **when to stop** the auction
+		- **who’s the winner**
+		- **how much they have to pay**
+
+##### Describe the properties of a given type of auction
 - **English**
 	- Start low and keep open-cry bidding higher
 	- **Efficient**
@@ -319,24 +345,60 @@
 	- **Not susceptible to collusion**
 	- **Computational simplicity**
 	- **Counter intuitive** for **human bidders**
-##### Describe the properties of a given type of auction 
+
 ##### Select the most appropriate type of auction for a given application 
+- 
 
 ## Week 9: Uncertainty
 ##### Calculate conditional probabilities using inference by enumeration 
-##### Use conditional independence to simplify probability calculations 
+- Inference by enumeration is simply changing the space in which the probability is taken from
+
+##### Use conditional independence to simplify probability calculations
+
+
 ##### Use Bayes’ rule for solving diagnostic problems 
+- `P(A|B)P(B) = P(B|A)P(A)`
+- Solve this into
+	- `P(A|B) = P(B|A)P(A)/P(B)`
+
 ###### Note: if the arithmetic is too complex to compute the exact final value then simplify the expression as best you can
 
 ## Week 10: Bayesian Networks
-##### Formulate a belief network for a given problem domain 
+##### Formulate a belief network for a given problem domain
+- Write  
 ##### Derive expression for joint probability distribution for given belief network 
 ##### Use inference by enumeration to answer a query about simple or conjunctive queries on a given belief network 
 
 ## Week 11: Robotics 
 ##### Determine the number of degrees of freedom of a robot, and whether it is holonomic 
+- Degrees of freedom: Basically **how many different ways can we "move"**
+	- You need *6 degrees of freedom* to move around without restrictions *in 3d space* (*3 for position* and *3 for rotation*)
+	- ![](examrev/examrev7.png)
+- Something is **non-holonomic** when it **has more degrees of freedom** than **controls**
+	- For example a **_car is non-holonomic_ because has 2 controls** but has **3 degrees of freedom**
+		- Since it **can rotate in the x axis** and we **can accelerate/decelerate in the x axis** but **we _cannot accelerate/decelerate in the y axis_**
+
 ##### Characterise sources of uncertainty in a robot application scenario 
+- *Examples of Sources of Uncertainty in Robots*:
+	- **Slippage**
+	- **Inaccurate Joint Encoding**
+	- **Rough Surfaces**
+	- **Obstacles**
+	- **Injuries**
+
 ##### Explain the basic concepts of localisation and mapping 
+- Basically we scan our environment and **decide where we can't go**
+
 ##### Formulate an application problem using incremental Bayes, and calculate posterior probabilities 
+- Tutorial 11 rip
+
 ##### Model the configuration space for a simple robot 
+- Draw where it can't go lol
+
 ##### Compare different approaches to motion planning given a particular configuration space 
+- **Cell Decomposition**:
+	- Break configuration space into *simpler cells*
+		- Depends on the *resolution* of the cells
+		- Basically like *pixel-izing* our config space so it's finite
+- **Skeletonisation**:
+	- We define *limits* around the configuration space
