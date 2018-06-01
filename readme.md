@@ -13,18 +13,20 @@ Hopefully you will find these useful :smiley:
 
 **Good Luck, and Godspeed!**
 
-**Contents:**
+## Contents:
 
-**2018 (Semester 1) Work in Progress** :construction:
+### 2018 (Semester 1) Work in Progress :construction:
 
 Currently halfway through the sem. Experimenting using Markdown instead. Note that as Markdown allows use of inline images you should preserve the original file structure.
 - Computer Systems (COMP30023)
-	- Completed up till week 6 (mid-semester summary still WIP)
-	- Crazy dense subject on networks. It's pretty good so far. :+1:
+	- (06/04/18) Completed up till week 6 (mid-semester summary still WIP)
+		- Crazy dense subject on networks. It's pretty good so far. :+1:
+	- (21/05/18) Completed the last Tutorial/Lecture
 - Software Modelling and Design (SWEN30006) [t.b.d.] :construction:
 - Artificial Intelligence (COMP30024) [t.b.d.] :construction:
+	- (31/05/18) Exam notes halfway completed
 
-**2017 (Semester 2)**
+### 2017 (Semester 2)
 
 Most of these notes were made with the [Notes](https://packagecontrol.io/packages/Notes) syntax and exported to pdf with the [Export to HTML](https://packagecontrol.io/packages/ExportHtml) package, both for Sublime Text. Hopefully these haven't deprecated just yet!
 - Object Oriented Software Development (SWEN20003)
