@@ -177,6 +177,8 @@
 	- **Optimal since it results in the same thing**
 	- *Time:* **O(b<sup>m/2</sup>) with perfect ordering**
 	- *Space:* **Same as time?**
+- Quiescence Search
+	- Find a cut-off depth in minimax
 
 ##### Explain how to search in nondeterministic games e.g., demonstrate operation of ExpectiMinimax 
 - **Expectiminimax**
@@ -214,8 +216,8 @@
 - w<sub>j</sub>: *Current weight*
 - d<sub>i</sub>: *Error*
 - η: *Learning rate*
-- λ = 0: *weights move towards the predicted reward* at **next state** (i.e. move towards r(s<sub>i+1</sub>, w))
-- λ = 1: *weights move towards* the **final true reward** (i.e. move towards r(s<sub>N</sub>))
+- λ = 0: *weights move towards the predicted reward* at **next state** (i.e. move towards r(s<sub>i+1</sub>, w)) **using only the next state**
+- λ = 1: *weights move towards* the **final true reward** (i.e. move towards r(s<sub>N</sub>)) **using all states**
 - ![\large \frac{\partial r(s_{l}^{i}, w)}{\partial w_{j}}](https://latex.codecogs.com/gif.latex?\frac{\partial&space;r(s_{l}^{i},&space;w)}{\partial&space;w_{j}}): How **_reward_ is changing with respect to _weight_**
 - ![\large \[\sum_{m=1}^{N-1}\lambda^{m-i}d_{m}\]](https://latex.codecogs.com/gif.latex?[\sum_{m=1}^{N-1}\lambda^{m-i}d_{m}]): **Weighted Sum of Error**
 
@@ -256,6 +258,8 @@
 		- **Keep going** until **the queue is empty** (i.e. the **graph is consistent** and **there are no conflicts**)
 	- *Time Complexity:* _**O(n<sup>2</sup>d<sup>3</sup>)**_
 		- Can be reduced to _**O(n<sup>2</sup>d<sup>2</sup>)**_ with a good heuristic/ordering
+	- This *checks for conflicts*
+	- You should *do this before backtracking search*
 
 ###### e.g., in what order are variables or values chosen using minimum remaining values, degree heuristic, least constraining value
 - **Variable Ordering**
@@ -351,10 +355,22 @@
 
 ## Week 9: Uncertainty
 ##### Calculate conditional probabilities using inference by enumeration 
-- Inference by enumeration is simply changing the space in which the probability is taken from
+- Inference by enumeration is changing the space in which the probability is taken from
 
 ##### Use conditional independence to simplify probability calculations
-
+- **A and B are independent** iff
+	- `P(A|B) = P(A) or P(B|A) = P(B) or P(A, B) = P(A)P(B)`
+	- Also means `P(A|!B) = P(A) and etc.`
+- This means **if _A and B are independent_** then we can **simplify P(A|B,C)**
+	- Since `P(A|B) = P(A)` then **`P(A|B,C)` becomes `P(A|C)`**
+	- Also `P(A, B|C) = P(A|C)P(B|C)` since `P(A, B) is P(A)P(B)`
+- Now we can simplify complex things such as *full joint distribution using chain rule*
+	- *Given A and B are independent* `P(A, B, C)` would *normally have 2<sup>3</sup>-1 entries*
+	- Reduce it by using the above rules + *chain rules*
+		- `Chain Rule: P(X1, X2, X3, X4) = P(X4 | X1, X2, X3)`
+		- `P(A, B, C) = P(C|A, B) P(A, B)`
+		- `P(A, B, C) = P(C|A, B) P(B|A) P(A)`
+		- `P(A, B, C) = P(C|A) P(B|A) P(A)` = 2 + 2 + 1 = 5 entries vs 7
 
 ##### Use Bayes’ rule for solving diagnostic problems 
 - `P(A|B)P(B) = P(B|A)P(A)`
@@ -365,9 +381,27 @@
 
 ## Week 10: Bayesian Networks
 ##### Formulate a belief network for a given problem domain
-- Write  
+- Basically form a graph where causal nodes lead to symptomal modes
+	- Causes -> Symptoms
+- A grandfather node *should be independent of it's grandchildren*
+
 ##### Derive expression for joint probability distribution for given belief network 
+- Look at [Uncertainty](#use-conditional-independence-to-simplify-probability-calculations)
+- This is can be done with **global semantics**:
+	- Defines a **full joint distribution** as the product of the *local conditional distributions*
+		- ![](examrev/examrev8.png)
+		- Applying this to : ![](examrev/examrev9.png)
+		- ![](examrev/examrev10.png)
+	- **Local semantics**: *each node is conditionally independent* of its nondescendants *given its parents*
+
 ##### Use inference by enumeration to answer a query about simple or conjunctive queries on a given belief network 
+- **Simple Query**:
+	- Simply calculating a probability from posterior marginals
+	- e.g., P(NoGas|Gauge = empty, Lights = on, Starts = false)
+- **Conjunctive Query**:
+	- Breaking a query into smaller queries using the chain rule:
+	- P(X<sub>i</sub>, X<sub>j</sub>|E = E) = P(X<sub>i</sub>|E = E) P(X<sub>j</sub>|X<sub>i</sub>, E = E)
+
 
 ## Week 11: Robotics 
 ##### Determine the number of degrees of freedom of a robot, and whether it is holonomic 
@@ -380,17 +414,24 @@
 
 ##### Characterise sources of uncertainty in a robot application scenario 
 - *Examples of Sources of Uncertainty in Robots*:
-	- **Slippage**
-	- **Inaccurate Joint Encoding**
-	- **Rough Surfaces**
-	- **Obstacles**
-	- **Injuries**
+	- **Perceptions (incorrect sensing)**
+		- *Incorrect sensors*
+		- *False positive/negative*
+		- *Limited/Finite Time*
+		- *Partially Obstructed Environment*
+	- **Actions (incorrect doing)**
+		- *Rough Surfaces*
+		- *Obstacles*
+		- *Slippage*
+		- *Inaccurate Joint Encoding*
+		- *Injuries (Effective Breakdown)*
 
 ##### Explain the basic concepts of localisation and mapping 
 - Basically we scan our environment and **decide where we can't go**
 
 ##### Formulate an application problem using incremental Bayes, and calculate posterior probabilities 
-- Tutorial 11 rip
+- Tutorial 11
+	- Basically re-calculating P(+) when calculating P(o|++)
 
 ##### Model the configuration space for a simple robot 
 - Draw where it can't go lol
@@ -400,5 +441,11 @@
 	- Break configuration space into *simpler cells*
 		- Depends on the *resolution* of the cells
 		- Basically like *pixel-izing* our config space so it's finite
+	- Inaccurate
 - **Skeletonisation**:
-	- We define *limits* around the configuration space
+	- *Voronoi Diagrams*:
+		- We define *limits* around the configuration space
+		- Voronoi Diagrams don't scale well
+	- *Probabilistic Roadmap*: 
+		- Generate random points within configuration space and creating a graph
+		- Need to generate enough points to ensure everywhere is reachable
