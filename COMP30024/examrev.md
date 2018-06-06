@@ -77,10 +77,10 @@
 ##### Apply a search strategy to solve problem
 - **BFS**
 	- Expand breadth wise
-	- **Complete**
+	- **Complete if branching factor is finite**
 	- *Time:* **O(b<sup>d</sup>)**
 	- *Space:* **O(b<sup>d</sup>)**
-	- **Optimal Path**
+	- **Optimal Path if path cost is uniform, otherwise _not complete or optimal in general_**
 - **DFS**
 	- Expand depth wise
 	- **Not Complete if in Infinite Space**
@@ -449,3 +449,10 @@
 	- *Probabilistic Roadmap*: 
 		- Generate random points within configuration space and creating a graph
 		- Need to generate enough points to ensure everywhere is reachable
+- **Localisation vs Mapping**
+	- *Localisation* is when you're *given a map and observed landmarks* and you *update your location and orientation distribution*
+		- Where am I?
+	- *Mapping* is when you're given the *pose distribution and observed landmarks* and you *derive a map from this*
+		- Making a map
+	- *SLAM (Simultaneous)*:
+		- Do both of the above at the same time
