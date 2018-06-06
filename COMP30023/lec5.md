@@ -59,7 +59,7 @@ There is a security issue where the well known ports can be attacked if the atta
 - Can be countered by just changing the port
 
 ### Multiplexing/Demultiplexing
-- Shortened to MIXUNG and DEMIXUNG
+- Shortened to MUXING and DEMUXING (not MUZZING :facepunch: :stuck_out_tongue_winking_eye:)
 	- Multiplexing - combining multiple distinct streams into a single shared stream
 	- Demultiplexing - splitting distinct streams from a single shared stream
 - An example of this is using FFMPEG and changing audio/video streams
