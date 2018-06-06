@@ -203,9 +203,172 @@ private Square s = board.getSquare(name)
 ```
 
 ### Controller
+- Overall system is run by this controller
 - Coordinates the system
-- Delegates events and responses
+- *Delegates events and responses* to lower classes
+- May get too *bloated*
+	- Too many responsibilities
+	- Low cohesion
+	- Unfocused
+```java
+// overall controller class
+public doX() {
+	lowerClasses.dostuff()
+}
+public doY() {
+	lowerClasses.dostuff()
+}
+```
 
+### High Cohesion
+- How *focused* you keep your objects
+- Usually a result of *low coupling*
+- A class with high cohesion is easier to understand and maintain
+- However low cohesion is sometimes justified to meet performance requirements etc.
+
+### State Machines
+- State machine describes the behaviour of an object
+	- *Event*: Significant or noteworth occurence
+	- *State*: Condition of the object at a moment in time
+	- *Transition*: Directed relationship between two states that an event can cause
+	- ![](summary/summary9.png)
+- Choices are done with *diamonds* and `[]`
+	- ![](summary/summary10.png)
+- You can also do *nested states*
+	- Sub states which are state machines in themselves:
+	- ![](summary/summary11.png)
+```java
+enum State { STATE1, STATE2, FINAL }
+State state = State.STATE1;
+int lastX;
+
+public void eventA(int x) {
+	state = State.STATE2;
+}
+
+public void eventB() {
+	if (State.STATE1 == state) {
+		state = State.FINAL
+	}
+}
+```
+
+### Polymorphism
+- Allowing our code to morph in different situations
+- Different behaviour/operations with the same interface
+- May result in too many objects
+- Needs to be balanced with representational decomposition
+
+### Pure Fabrication
+- Which object should have responsibility when solutions offered by other patterns violate High Cohesion/Low Coupling
+- Make up a class that doesn't actually represent something irl but supports high cohesion/low coupling
+```java
+// This is like that example of monopoly
+// Instead of having 2 dice we'll have a 'cup'
+int fvTot = 0;
+for (int i < 0; i < dice.length; i++) {
+	dice[i].roll();
+	fvTot += dice[i].getFaceValue();
+}
+
+// To this
+cup.roll();
+```
+
+### Indirection
+- When we assign the responsibility to an immediate object to mediate between the other components or services so that they are not directly coupled
+- Higher complexity in design but results in way lower coupling
+
+```java
+// making up an adapter
+// this is also done with the strategy pattern
+
+public doAThing() {
+	// do a thing here
+	// and here
+	// and more stuff leading to coupling
+}
+
+private Adapter thing;
+thing.doAThing(); // Where Adapter can be altered to whatever
+
+```
+
+### Protected Variations
+- Identify points of known or predicted variation/instability
+- Create a stable interface around them
+
+### Open-Closed Principle
+- Modules should be *open for extension* but *closed to modification*
+- Done with interfaces
+- Same thing as protected variations but with different emphasis
+
+
+-------------------------------
+also you can make code from designs lol
+
+-------------------------------
+
+### Visibility
+- Four kinds of *visibility* in design
+- For A to send a message to B, B must be visible to A
+	1. B is an *attribute* of A
+		- ![](summary/summary12.png)
+	2. B is a *parameter method* of A
+		- ![](summary/summary13.png)
+	3. B is a (non-parameter) *local* object in a method of A
+		- ![](summary/summary14.png)
+	4. B has in some way *global* visibility
+		- ![](summary/summary15.png)
+- `-` is for private
+- `+` is for public
+- `#` is for protected
+
+-------------------------------
+
+### Test-Driven Development
+- Development where you write the requirements test before  the code
+- Ensure production code passes tests before proceeding
+- Clarifies software behaviour
+
+### Refactoring
+- Rewriting or restricting existing code without changing it's external behaviour
+- Fixing your code before submitting it lol
+- Removing:
+	- Duplicated code
+	- Big methods
+	- Class with many instance variables
+	- Class with lots of code
+	- Similar subclasses
+	- Little/no use of interfaces in design
+	- High Coupling
+	- Low Cohesion
+
+-------------------------------
+
+### Software Architecture
+- Set of significant decisions about the organisation of a software system
+- The *structural elements* and the *interfaces* by which the system is composed
+- The behaviour as specified in the collaborations
+- The composition of these systems
+- The architectural style that guides this organisation
+
+### Logical Architecture and Layers
+- The large scale organisation of the software classes into packages, subsystems and layers
+- Logical: not concerned with networking, physical computers or operating system processes.
+
+### Layered Architecture
+- **Strict**: Layer only *calls upon the services of the layer directly below it*
+	- e.g. network protocol stack
+- **Relaxed**:
+	- A layer calls upon the services in several lower layers
+
+### Designing with Layers
+- Organise structure of system into *distinct cohesive layers* from high application specific to low general services
+- Collaboration and coupling from higher layers to lower layers
+
+
+-------------------------------
 
 ### Patterns
 *"A pattern is a recurring successful application of expertise in a particular domain."*
@@ -216,8 +379,51 @@ private Square s = board.getSquare(name)
 - Capture 'expertise' and make it accessible to non-experts in standard form
 
 ### Types of Patterns
+### Gang of Four
+#### Adapter
+- Resolve incompatible interfaces or provides a stable interface
+- Convert the original interface of a component into another interface through intermediate object
+![](summary/summary16.png)
 
+#### Façade Pattern
+- Wraps access to a subsystem with a single object
+- Like a controller for the whole system
+- Front-end
+- Who creates the adapters?
+```java
+public class Sale {
+public void makeLineItem( ProductDescription desc, int quantity )
+{
+SalesLineItem sli = new SalesLineItem( desc, quantity );
+// call to the Facade
+if ( POSRuleEngineFacade.getInstance().isInvalid( sli, this ) )
+return;
+lineItems.add( sli );
+}
+// ...
+} // end of class
+```
 
+#### Factory (not GoF)
+- Simplified GoF Abstract Factory pattern
+- Hides complex logic
+- Pure fabrication object that handles creation
+- Who creates the factory?
 
+#### Strategy
+- How do design for varying but related algorithms?
+- Define each algorithm in a separate class with a *common interface*
+- Used this in Projects
+```java
+private Strategy strategy = new GoodStrategy();
+strategy.run(); // any class that implements Strategy can now have different algorithms
+```
 
-徐聲恩
+#### Composite
+- How to treat a group or composition structure of objects the same way as a non-composite object?
+- Define classes for composite and atomic objects so that they implement the same interface
+
+### Observer (Publish-Subscribe)
+- Define a subscriber or listener interface.
+- Subscribers implement this interface.
+- Publisher can dynamically register subscribers who are interested in an event and notify them when an event occurs

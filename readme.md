@@ -17,24 +17,30 @@ Hopefully you will find these useful :smiley:
 
 ### 2018 (Semester 1) Work in Progress :construction:
 
-Currently halfway through the sem. Experimenting using Markdown instead. Note that as Markdown allows use of inline images you should preserve the original file structure.
-- Computer Systems (COMP30023)
-	- (06/04/18) Completed up till week 6 (mid-semester summary still WIP)
-		- Crazy dense subject on networks. It's pretty good so far. :+1:
+This semester I decided to experiment using Markdown instead. It's a more universal format than the [Notes](https://packagecontrol.io/packages/Notes) syntax I previously used and, more importantly, renders nicely in GitHub and allows the use of inline images. I wrote everything using Sublime Text with the [ImagePaste](https://packagecontrol.io/packages/ImagePaste) package, which allows you to `Ctrl+V` images into Sublime. I also used [Markdown Preview](https://packagecontrol.io/packages/MarkdownPreview) which allows you to preview your Markdown text as you write it!
+
+*Note:* As Markdown allows use of inline images you should preserve the original file structure.
+
+- [**Computer Systems (COMP30023)**](COMP30023)
+	- (06/04/18) Completed up till week 6
 	- (21/05/18) Completed the last Tutorial/Lecture
-- Software Modelling and Design (SWEN30006) [t.b.d.] :construction:
-- Artificial Intelligence (COMP30024) [t.b.d.] :construction:
+	- Crazy dense subject on networks. It's pretty good so far. :+1:
+- [**Software Modelling and Design (SWEN30006) [t.b.d.] :construction:**](SWEN30006)
+- [**Artificial Intelligence (COMP30024)**](COMP30024)
 	- (31/05/18) Exam notes halfway completed
+	- (04/06/18) Exam notes completed
+	- Feels like an extension of Design of Algorithms. More search algorithms and some cool probability/machine learning stuff. It's pretty fun.
+		- Contains [`examrev.md`](COMP30024/examrev.md), a short exam revision summary of the course and [`ai.pdf`](COMP30024/ai.pdf), a long, messy, 89-page set of notes which covers the course from start to end. Thanks to [@joannag6](https://github.com/joannag6) for sticking with me this sem! 
 
 ### 2017 (Semester 2)
 
 Most of these notes were made with the [Notes](https://packagecontrol.io/packages/Notes) syntax and exported to pdf with the [Export to HTML](https://packagecontrol.io/packages/ExportHtml) package, both for Sublime Text. Hopefully these haven't deprecated just yet!
-- Object Oriented Software Development (SWEN20003)
+- [**Object Oriented Software Development (SWEN20003)**](SWEN20003)
 	- Pretty much a Crash Course in Java. Covers the basics of programming to some object oriented concepts such as polymorphism and abstract classes.
-- Database Systems (INFO20003)
+- [**Database Systems (INFO20003)**](INFO20003)
 	- Content includes SQL, query processing and some database theory. 
 	- <sub>also the content was really dry and it wasn't taught well due to new management but don't tell them i said that</sub>
-- Declarative Programming (COMP30020 or COMP90048)
+- [**Declarative Programming (COMP30020 or COMP90048)**](COMP30020)
 	- By far one of the better courses I've taken. Teaches the basics of Functional and Declarative Programming. Content includes how Haskell and Prolog work.
 	- However notes only covers the Haskell section as the Prolog section was lost to time :disappointed:
 
