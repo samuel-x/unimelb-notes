@@ -7,6 +7,7 @@
 	- "Alright let's write everything in main()"
 - **Modelling**: Creation of tangible but abstract representations of a system so you can communicate ideas
 	- "Alright look at my diagram I put everything in one function and now it's faster"
+	
 ---------------------------------------
 
 ### Iterative UP (Unified Process)
@@ -347,11 +348,11 @@ also you can make code from designs lol
 -------------------------------
 
 ### Software Architecture
-- Set of significant decisions about the organisation of a software system
+- Set of *significant decisions about the organisation of a software system*
 - The *structural elements* and the *interfaces* by which the system is composed
-- The behaviour as specified in the collaborations
-- The composition of these systems
-- The architectural style that guides this organisation
+- The *behaviour* as specified in the collaborations
+- The *composition* of these systems
+- The *architectural style* that guides this organisation
 
 ### Logical Architecture and Layers
 - The large scale organisation of the software classes into packages, subsystems and layers
@@ -366,10 +367,179 @@ also you can make code from designs lol
 ### Designing with Layers
 - Organise structure of system into *distinct cohesive layers* from high application specific to low general services
 - Collaboration and coupling from higher layers to lower layers
+- e.g.
+	- UI Layer
+		- GUI Windows
+		- HTML, etc.
+	- Application
+		- Handles presentation layer requests
+		- Session state
+		- Window transitions
+	- Domain
+		- Services used by application
+		- Handles application layer requests
+- *Removes intertwining* of application logic and UI
+	- Allows things to be *reused*
+- *Removes High Coupling*
 
+### Model-View Separation Principle
+- Don't couple non-UI objects directly to UI objects
+	- Non-UI objects are *now reuseable and re-attachable to new UI*
+- Don't put application logic in UI object methods
+
+### UML Component Diagrams
+- Model the system in *terms of modules*
+- Encapsulate its contents
+- These modules should be *replaceable within their environment*
+- Can be a class
+
+### Distributed Architectures
+- When components are hosted on different platforms
+- Communicate through a network
+- **Client-Server Architecture**:
+	- Two components: Clients and Servers
+	- When request is received, server processes request, then sends response back to client
+	- Servers may be stateless or stateful which allows for transactional interation
+- **Peer to Peer Achitecture**:
+	- Roles of client and server switch back and forth between components
+- **Pipeline Architecture**:
+	- One of the oldest distributed architectures
+	- Filter perpetually reads data from an input Pipe, processes it, then writes the result to an output pipe
+	- Can be state and linear or can be dynamic and complex
 
 -------------------------------
 
+### Operation Contracts
+- An *operation contract* documents how a particular function will change different elements in a program
+- Made up of the following:
+	- **Operation**: Name of the operation and parameters
+	- **Cross References**: Use cases within which this operation can occur
+	- **Preconditions**: Noteworthy assumptions about system state or objects in the Domain Model before execution of the operation. These are non trivial assumptions the reader should be told.
+	- **Postconditions**: Most important section. State of objects in the domain model after completion of the operation
+		- Describes changes by the operation of objects in the domain model.
+		- instances being *created or deleted*
+		- Associations formed or broken
+		- *What happened?*
+		- *Past tense*
+
+-------------------------------
+
+### Architectural Analysis
+- Concerned with *identifying and resolving system's non-functional requirements in the context of it's functional requirements*
+- Includes identifying and analysing
+	- Architecturally significant requirements
+	- Variation points
+	Probable evolution points
+- Reduces risk of missing a critical factor in system design and helps focus effort
+
+### Non-Functional Requirements
+- Usability
+	- E.g. Aesthetics and consistency in the UI
+- Reliability
+	- e.g. Availability, accuracy of system calculations, and the system's ability to recover from failure
+- Performance
+	- e.g. throughput, respones time, recovery time, start up time, and shutdown time
+- Supportability
+	- e.g.testability, adaptability, maintainability, compatibility, configurability, installability, scalability and localizability
+
+### Common Steps in Architectural Analysis
+1. Identify/analyse architectural factora: requirements with impact on the architecture
+	- Overlaps with requirements analysis
+	- Some identified/recorded during inception, now investigated in more detail
+2. For the architectural factors, analyse alternatives and create solutions; architectural decisions
+
+### Priorities
+1. Inflexible constraints
+	- Safety/security/legal compliance
+2. Business goals
+	- Demo for clients
+	- Competitor driven window of opportunity
+3. Other Goals
+	- Extendible
+
+### Architectural Factor Table
+1. Factor
+2. Measures and quality scenarios
+3. Variability
+4. Impact of factor on stakeholders, architecture and other factors
+5. Priority for success
+6. Difficulty or risk
+
+### Technial Memo
+1. Issue
+2. Solution Summary
+3. Factors
+4. Solution
+5. Motivation
+6. Unresolved issues
+7. Alternatives considered
+
+### Separation of Concerns
+- Cross-cutting conerns:
+	- Those with a wide application or influence across the system e.g. data persistence, security
+
+----------------
+
+### Use Case Include Relationship
+- Use *include* when you are repeating yourself in two or more separate use cases and you want to avoid repetition
+	- Most common and important relationship
+	- Arises when partial behaviour is common across several use cases
+	- Refactor common part into a subfunction use case
+
+### Use Case Extend Relationship
+- Use *extend* when you want to add new extensions or conditional steps to a use case but can't or don't want to add to the text in the use case
+- Use when modifying base use case is undesirable
+- Base use case doesn't refer to extending use case
+- Extending use case describes its relationship with the base use case
+- Extending use case doesn't apply in its own right
+
+-------------------------------
+
+### UML Activity Diagrams
+- Not in the exam
+- Shows sequential and parallel activities in a process
+- Useful for modelling:
+	- Business processes
+	- Workflows
+	- Dataflows
+	- Complex Algorithms
+	- ![](summary/summary17.png)
+- Shows both control and data flow
+
+### Inception
+- Short project phase questions
+- What is the vision and business case for this project?
+- Feasible?
+- Buy and or build?
+- Rough unreliable range of cost?
+- Should we proceed or stop?
+
+### Design Iteratively
+- Provoje early change
+	- Don't just passively embrace change
+- A few days analysis/case writing vs a few *weeks developing*
+
+----------------------------------
+
+### Object Design
+- We can create objects by
+	- 10iq Coding with an IDE
+	- 50iq Draw, then code
+	- 10000iq Only Draw (tool generated wtf)
+
+### Agile Modelling
+- Modelling with other developers
+- Static/Dynamic models
+- UML tools
+- Object Design skill is more important than UML skill
+
+### CRC Cards
+- Class Responsibility Collaboration cards
+- Are a popular text-oriented object design technique
+- Based around index cards
+
+
+----------------------------------
 ### Patterns
 *"A pattern is a recurring successful application of expertise in a particular domain."*
 - Improve Understandability
@@ -381,15 +551,24 @@ also you can make code from designs lol
 ### Types of Patterns
 ### Gang of Four
 #### Adapter
-- Resolve incompatible interfaces or provides a stable interface
-- Convert the original interface of a component into another interface through intermediate object
+- Pros
+	- Resolve incompatible interfaces or provides a stable interface
+	- Convert the original interface of a component into another interface through intermediate object
+	- Seperation of Concerns/High Cohesion
+- Cons
+	- Who creates the adapters?
+	- Not a domain object
 ![](summary/summary16.png)
 
-#### Façade Pattern
-- Wraps access to a subsystem with a single object
-- Like a controller for the whole system
-- Front-end
-- Who creates the adapters?
+#### Façade Pattern (A type of adapter)
+- Pros
+	- Wraps access to a subsystem with a single object
+	- Like a controller for the whole system
+	- Kinda like front-end
+- Cons
+	- Who creates the adapters?
+	- How is it accessed?
+	- How should we 
 ```java
 public class Sale {
 public void makeLineItem( ProductDescription desc, int quantity )
@@ -405,25 +584,47 @@ lineItems.add( sli );
 ```
 
 #### Factory (not GoF)
-- Simplified GoF Abstract Factory pattern
-- Hides complex logic
-- Pure fabrication object that handles creation
-- Who creates the factory?
+- Pros
+	- Simplified GoF Abstract Factory pattern
+	- Hides complex logic
+	- Pure fabrication object that handles creation
+	- Should have only one instance
+- Cons
+	- Who creates the factory?
+	- How is it accessed?
+
+### Singleton (GoF)
+- Pros
+	- Only one instance of a class allowed
+	- Basically defining a class as static
+	- Define a static method of the class that returns a singleton
+- Cons
+	- Static methods are not polymorphic in most langs
+	- Most remote communications don't support remote-enabling of static methods
+
 
 #### Strategy
-- How do design for varying but related algorithms?
-- Define each algorithm in a separate class with a *common interface*
-- Used this in Projects
+- Pros
+	- How do design for varying but related algorithms?
+	- Define each algorithm in a separate class with a *common interface*
+	- Used this in Projects
+	- Allows you to add/change algorithms without changing structure of code
+- Cons
+	- Adds a layer of interfaces
 ```java
 private Strategy strategy = new GoodStrategy();
 strategy.run(); // any class that implements Strategy can now have different algorithms
 ```
 
 #### Composite
-- How to treat a group or composition structure of objects the same way as a non-composite object?
-- Define classes for composite and atomic objects so that they implement the same interface
+- Pros
+	- How to treat a group or composition structure of objects the same way as a non-composite object?
+	- Define classes for composite and atomic objects so that they implement the same interface
+- Cons
+	- Results in higher complexity?
 
 ### Observer (Publish-Subscribe)
-- Define a subscriber or listener interface.
-- Subscribers implement this interface.
-- Publisher can dynamically register subscribers who are interested in an event and notify them when an event occurs
+- Pros
+	- Define a subscriber or listener interface
+	- Subscribers implement this interface
+	- Publisher can dynamically register subscribers who are interested in an event and notify them when an event occurs
