@@ -29,19 +29,13 @@
 
 ##### Connection-Oriented vs Connectionless Internet Layer
 Issue|Datagram Network|Virtual Circuit
+---|---|---
 Type|Connectionless|Connection-oriented
-Addressing Each packet has full source
-and destination
-Each packet contains a
-short VC number
-State Routers do not hold state
-information about
-connections
-Each VC requires router
-table space per connection
-Routing Each packet independently Defined at set-up
-Quality of Service Difficult Easy if enough resources
-Congestion control Difficult Easy if enough resources
+Addressing|Each packet has full source and destination|Each packet contains a short VC number|
+State|Routers do not hold state information about connections|Each VC requires router table space per connection
+Routing|Each packet independently|Defined at set-up
+Quality of Service|Difficult|Easy if enough resources
+Congestion control|Difficult|Easy if enough resources
 
 ##### Multiprotocol Label Switching
 - Widely deployed Virtual Circuit (connection-oriented) Internet Layer Protocol

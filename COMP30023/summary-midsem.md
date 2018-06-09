@@ -772,24 +772,24 @@ Threads vs Processes
 -   Threads are a sequential executation
 -   Threads vs Single Process ![](lec8/lec87.png)
 
-More threads = more danger/reliability issues but also more performande
-Threads are just sub-processes
+More threads = more danger/reliability issues but also more performance
+Threads are like sub-processes
 
 If youre doing threads then you can treat each thread as a
-representation for processes - Fork() creates a new process with it's
-own entirely new process context - Cline() : creates with it's own
-idetity but is allowed to give data structutres to parent
+representation for processes 
+- Fork() creates a new process with it's own entirely new process context 
+- Clone() : creates with it's own identity but is allowed to give data structutres to parent
 
 `not going to talk about pthreads either since that's just a POSIX standard and more code stuffs - look at lec8 for more`
 
 Global variables are *shared across threads*
 
--   This results in any thread being *ablel to modify shared data* at
+-   This results in any thread being *able to modify shared data* at
     any time
 -   Need to synchonize threads (as they should all be aware of this
     change in data)
 -   Multithreaded is really hard to do correctly - as it's
-    non-determiinistic
+    non-deterministic
 -   Running a program twice can result in different values
 -   Normal testing doesn't really work
 -   Way more theoretical modelling

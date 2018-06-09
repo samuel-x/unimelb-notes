@@ -60,19 +60,19 @@ Don't need to remember this exactly, but it is a good way to visualise it
 
 ### Sockets in C
 **Headers**
-``` C
+```C
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <netinet/in.h>			// Interfaces to use
 ```
 **Variables**
-``` C
+```C
 int listenfd = 0, connfd = 0;
 char sendBuff[1025]; 			// send buffer
 struct sockaddr_in serv_addr;	// Server address
 ```
 **Create a socket**
-``` C
+```C
 // Listen file descriptor
 // AF_INET specifies you're communicating over internet
 // AF_UNIX would specify communicating same machine
@@ -92,12 +92,12 @@ serv_addr.sin_port = htons(5000); //Listen on port 5000
 
 The process:
 **Bind and listen**
-``` C
+```C
 bind(listenfd, (struct sockaddr*)&serv_addr, sizeof(serv_addr));
 listen(listenfd, 10) // maximum number of client connections to queue
 ```
 **Accept, Send, Close**
-``` C
+```C
 // Use same file descriptor
 connfd = accept(listenfd, (struct sockaddr*)NULL, NULL);
 
@@ -109,11 +109,11 @@ write(connfd, sendBuff, strlen(sendBuff));
 close(connfd);
 ```
 **Connect**
-``` C
+```C
 connect(connfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr)
 ```
 **Receive**
-``` C
+```C
 while ( (n = read(connfd, recvBuff, sizeof(recvBuff)-1)) > 0)
 {
 //process received buffer
@@ -148,7 +148,7 @@ diferent ways of representing itself
 ### Process and Threads
 If youre doing threads then you can treat each thread as a representation for processes
 - Fork() creates a new process with it's own entirely new process context
-- Clone() : creates with it's own idetity but is allowed to give data structutres to parent
+- Clone() : creates with it's own identity but is allowed to give data structutres to parent
 
 ### Pthreads
 - POSIX standard for API for thread and synchonisation. 
@@ -180,7 +180,7 @@ termination.**
 
 
 Global variables are *shared across threads*
-- This results in any thread being *ablel to modify shared data* at any time
+- This results in any thread being *able to modify shared data* at any time
 - Need to synchonize threads (as they should all be aware of this change in data)
 - Multithreaded is really hard to do correctly - as it's non-deterministic
 - Running a program twice can result in different values

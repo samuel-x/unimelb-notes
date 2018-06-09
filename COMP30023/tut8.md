@@ -75,7 +75,7 @@ Internet -> WAN -> ROUTER -> Computer/Phone/Speaker
 - The NAT inside the router translates the port number of the user and then uses a converted version to communicate with the web server
 - When the web server responds with the converted port, the NAT in the router translates it back to the original
 ```
-Internet (80) <-> (5678) NAT in ROUTER <-> (1234) source)
+Internet (80) <-> (5678) NAT in ROUTER <-> (1234) source
 ```
 
 #### (d) John is a keen computer science student who is writing his own web server. Describe the key difficulty he will face when testing his server which is related to the solution you described above, and describe a workaround for the problem.

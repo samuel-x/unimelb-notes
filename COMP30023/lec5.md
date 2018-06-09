@@ -28,7 +28,7 @@ Note: Typically segments are used in reference to TCP (as TCP splits data into s
 ### Transport Layer Service
 **Reliable Connection Orientated Service**
 - Provides a notational perfect connection between two nodes
-- Hides achknowledgements, congestion control, lost packets
+- Hides acknowledgements, congestion control, lost packets
 - Service provided to the application layer
 - "If you format your message like this I'll send it"
 - Layers above have no clue what happens below

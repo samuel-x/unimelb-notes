@@ -119,7 +119,7 @@ During the lifetime of a process, pages in its virtual address space all start o
 
 ### Operation of paging
 - Whenever the CPU accesses memory, the MMU transform the addresses according to the mapping.
-- The information required to do the mapping is recorded in a page table. Each process has it's own virtual addres space, thus it's own page.
+- The information required to do the mapping is recorded in a page table. Each process has it's own virtual address space, thus it's own page.
 - Page table entry contains:
 	- Physical page number
 	- Valid bit
@@ -127,7 +127,7 @@ During the lifetime of a process, pages in its virtual address space all start o
 	- Modified Bit
 	- Read/Write/execute permission bits
 
-- MMU checks the selected PTE has the valid bit set to TRUE and the permissions permit memeory access
+- MMU checks that the selected PTE has the valid bit set to TRUE and the permissions permit memory access.
 - IF both conditions are met, it will construct the physical address using the physical page nunber field of the PTE.
 It will then set the referenced bit, and if the access was a write it'll also set the modified bit.
 - If either condition isn't met, you'll get a page fault exception.
