@@ -25,7 +25,12 @@ This semester I decided to experiment using Markdown instead. It's a more univer
 	- (06/04/18) Completed up till week 6
 	- (21/05/18) Completed the last Tutorial/Lecture
 	- Crazy dense subject on networks. It's pretty good so far. :+1:
-- [**Software Modelling and Design (SWEN30006) [t.b.d.] :construction:**](SWEN30006)
+- [**Software Modelling and Design (SWEN30006)**](SWEN30006)
+	- If you thought database systems was dry and uncoordinated, wait till you do this subject
+	- Really inconsistent, conflicting information
+	- Feels more like a section that we should've learnt about in OOSD and then never touched again
+	- Head tutor for my year had a reputation for not being a great tutor
+	- It's core for the Computer Science major, so prepare yourself. Hopefully it's better by then.
 - [**Artificial Intelligence (COMP30024)**](COMP30024)
 	- (31/05/18) Exam notes halfway completed
 	- (04/06/18) Exam notes completed
