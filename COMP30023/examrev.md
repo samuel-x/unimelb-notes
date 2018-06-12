@@ -253,17 +253,17 @@ HTTP
 
 ### HTTP Request Methods
 
-  Method    Safe   Idempotent   Cacheable
-  --------- ------ ------------ -----------
-  GET       Y      Y            Y
-  HEAD      Y      Y            Y
-  POST      N      N            Y/N
-  PUT       N      Y            N
-  DELETE    N      Y            N
-  CONNECT   N      N            N
-  OPTIONS   Y      Y            N
-  TRACE     Y      Y            N
-  PATCH     N      N            N
+  Method   |Safe  |Idempotent  |Cacheable
+  ---------|------|------------|-----------
+  GET      |Y     |Y           |Y
+  HEAD     |Y     |Y           |Y
+  POST     |N     |N           |Y/N
+  PUT      |N     |Y           |N
+  DELETE   |N     |Y           |N
+  CONNECT  |N     |N           |N
+  OPTIONS  |Y     |Y           |N
+  TRACE    |Y     |Y           |N
+  PATCH    |N     |N           |N
 
 ##### ***Idempotent***:
 
@@ -325,13 +325,13 @@ else is optional.***
 
 ### Response Codes
 
-  Code   Type           Example
-  ------ -------------- --------------------------------------------
-  1xx    Information    100 - Agrees to handle client's request
-  2xx    Success        200 = request succeeeded; 204 = no content
-  3xx    Redirection    301 = Page moved
-  4xx    Client Error   404 not found
-  5xx    Server Error   
+  Code  |Type          |Example
+  ------|--------------|--------------------------------------------
+  1xx   |Information   |100 - Agrees to handle client's request
+  2xx   |Success       |200 = request succeeeded; 204 = no content
+  3xx   |Redirection   |301 = Page moved
+  4xx   |Client Error  |404 not found
+  5xx   |Server Error  |
 
 #### HTTP Response Example:
 
@@ -357,7 +357,9 @@ Content-Type: text/html
     -   Since cookies appear everywhere you can figure out where
         someone's been
 -   Used for session/login data etc.
-    `HTTP  Name           Value               Domain              Expires         HTTPOnly    Secure Session-id      356-7555.....       .amazon.com.au      2036-01-01.     -           -`
+    ```
+    HTTP  Name           Value               Domain              Expires         HTTPOnly    Secure Session-id      356-7555.....       .amazon.com.au      2036-01-01.     -           
+    ```
 
 DNS
 ---
@@ -418,18 +420,18 @@ DNS
 -   These are described in a *zone file* of a DNS that basically gives
     information of the zone
 
-  Type    Meaning                   Value
-  ------- ------------------------- ------------------------------------------
-  SOA     Start of Authority        Parameters for this zone
-  A       IPv4 Address of a Host    32-Bit integer
-  AAAA    IPv6 Address of a Host    128-Bit integer
-  MX      Mail Exchange             Priority, domain willing to accept email
-  NS      Name Server               Name of a server for this domain
-  CNAME   Canonical name            Domain Name
-  PTR     Pointer                   Alias for an IP address
-  SPF     Sender policy framework   Text encoding of mail sending policy
-  SRV     Service                   Host that provides it
-  TXT     Text                      Descriptive ASCII text
+  Type   |Meaning                  |Value
+  -------|-------------------------|------------------------------------------
+  SOA    |Start of Authority       |Parameters for this zone
+  A      |IPv4 Address of a Host   |32-Bit integer
+  AAAA   |IPv6 Address of a Host   |128-Bit integer
+  MX     |Mail Exchange            |Priority, domain willing to accept email
+  NS     |Name Server              |Name of a server for this domain
+  CNAME  |Canonical name           |Domain Name
+  PTR    |Pointer                  |Alias for an IP address
+  SPF    |Sender policy framework  |Text encoding of mail sending policy
+  SRV    |Service                  |Host that provides it
+  TXT    |Text                     |Descriptive ASCII text
 
 -   Usually you'll have separate servers for MX and stuff, otherwise
     you'll get weird problems.
@@ -576,13 +578,13 @@ Transport Layer TCP
 
 ### Primitive Functions
 
-  Primitive    Packet Sent         Meaning
-  ------------ ------------------- -----------------------------------------------------------
-  LISTEN       (none)              Block until something tries to connect (can timeout this)
-  CONNECT      CONNECTION REQ      Actively attempt to connect
-  SEND         DATA                Send information
-  RECEIVE      (none)              Block until DATA packet arrives
-  DISCONNECT   DISCONNECTION REQ   This side wants to release connection
+  Primitive   |Packet Sent        |Meaning
+  ------------|-------------------|-----------------------------------------------------------
+  LISTEN      |(none)             |Block until something tries to connect (can timeout this)
+  CONNECT     |CONNECTION REQ     |Actively attempt to connect
+  SEND        |DATA               |Send information
+  RECEIVE     |(none)             |Block until DATA packet arrives
+  DISCONNECT  |DISCONNECTION REQ  |This side wants to release connection
 
 ### Segments
 
@@ -906,15 +908,17 @@ Internet Layer
     -   Know more about the network/bandwidth of the path
     -   Less congestion/QoS since you can restrict path
 
-Issue|Datagram Network|Virtual Circuit ---|---|---
-Type|Connectionless|Connection-oriented Addressing|Each packet has full
-source and destination|Each packet contains a short VC number|
-State|Routers do not hold state information about connections|Each VC
-requires router table space per connection Routing|Each packet
-independently|Defined at set-up **Quality of
-Service**|**Difficult**|**Easy if enough resources** **Congestion
-control**|**Difficult**|**Easy if enough resources** Only really have to
-remember the above
+Issue|Datagram Network|Virtual Circuit
+---|---|---
+Type|Connectionless|Connection-oriented
+Addressing|Each packet has full source and destination|Each packet contains a short VC number|
+State|Routers do not hold state information about connections|Each VC requires router table space per connection
+Routing|Each packet independently|Defined at set-up
+**Quality of Service**|**Difficult**|**Easy if enough resources**
+**Congestion control**|**Difficult**|**Easy if enough resources**
+
+Won't have to remember all of this
+
 
 Quality of Service
 ------------------
@@ -990,11 +994,11 @@ followed by a slash and the size of the network portion* -
     we get our internal network address
 
 A mask works like this:
-
+```
     Computer Science/17
     Electrical Engineering/18
     Arts/19
-
+```
 ### Network Address Translation (NAT)
 
 -   We've run out of IP addresses
@@ -1106,9 +1110,9 @@ A mask works like this:
 -   If router *j* is on the *optimal path from router i to k* then the
     optimal path from *j* to *k* also falls along the same route
 
-<!-- -->
-
+```
         i -------------> j --------------> k
+```
 
 ##### Sink Tree
 
@@ -1276,7 +1280,7 @@ Ethernet is old af and not made with a lot of modern features in mind.
     -   Terminate at ends of line
 
 ##### Ethernet Frames
-
+```
         [8][6][6][2][0-1500][0-46][4]
 
         Ethernet (DIX)
@@ -1284,7 +1288,7 @@ Ethernet is old af and not made with a lot of modern features in mind.
 
         Ethernet IEEE802.3
         [Preamble][SOF][Destination Address][Source Address][Length][Data][Pad][Check-sum]
-
+```
 -   Link layer kinda breaks layer structure
 -   People don't like type vs length
     -   Breaks layers
@@ -2531,6 +2535,6 @@ academic/really high powered shit
     -   CDN is good at delivering static stuff
     -   Moves all your dynamic stuff to the cloud network
 
-<!-- -->
-
+```
     good luck i hope u do well c:
+```
