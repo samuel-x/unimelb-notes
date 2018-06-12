@@ -4,6 +4,8 @@ COMP30023 Computer Systems Semester 1 2018
 
 Exam Revision Notes
 ===================
+
+### Table of Contents
 -   [Network Models](#network-models)
     -   [OSI vs TCP/IP](#osi-vs-tcpip)
         -   [Differences, Advantages,
@@ -45,24 +47,22 @@ Exam Revision Notes
         -   [Transport Layer Sliding
             Window](#transport-layer-sliding-window)
         -   [Sockets](#sockets)
-    -   [Processes and Threads](#processes-and-threads)
-        -   [Program vs Process vs
-            Threads](#program-vs-process-vs-threads)
-        -   [User vs Kernel Threads](#user-vs-kernel-threads)
-        -   [Program Status Word](#program-status-word)
-        -   [Interrupts](#interrupts)
-    -   [Memory Management](#memory-management)
-        -   [Swapping](#swapping)
-        -   [Virtual Memory](#virtual-memory)
-        -   [Paging](#paging)
-        -   [Memory Management Unit (MMU)](#memory-management-unit-mmu)
-        -   [Page Fault Handling](#page-fault-handling)
-        -   [Translation Lookaside
-            Buffer](#translation-lookaside-buffer)
-        -   [Address Spaces](#address-spaces)
-    -   [Internet Layer](#internet-layer)
-    -   [Only really have to remember the
-        above](#only-really-have-to-remember-the-above)
+-   [Processes and Threads](#processes-and-threads)
+    -   [Program vs Process vs
+        Threads](#program-vs-process-vs-threads)
+    -   [User vs Kernel Threads](#user-vs-kernel-threads)
+    -   [Program Status Word](#program-status-word)
+    -   [Interrupts](#interrupts)
+-   [Memory Management](#memory-management)
+    -   [Swapping](#swapping)
+    -   [Virtual Memory](#virtual-memory)
+    -   [Paging](#paging)
+    -   [Memory Management Unit (MMU)](#memory-management-unit-mmu)
+    -   [Page Fault Handling](#page-fault-handling)
+    -   [Translation Lookaside
+        Buffer](#translation-lookaside-buffer)
+    -   [Address Spaces](#address-spaces)
+-   [Internet Layer](#internet-layer)
     -   [Quality of Service](#quality-of-service)
         -   [Why is QoS important?](#why-is-qos-important)
         -   [QoS vs Net Neutrality](#qos-vs-net-neutrality)
@@ -79,56 +79,63 @@ Exam Revision Notes
         -   [Border Gateway
             Protocol (BGP)](#border-gateway-protocol-bgp)
         -   [Address Resolution Protocol](#address-resolution-protocol)
-        -   [Broadcast channels
-            collicions](#broadcast-channels-collicions)
-        -   [Ethernet](#ethernet-1)
-        -   [Classic Ethernet](#classic-ethernet-1)
-        -   [Classic Ethernet - Bus
-            Model](#classic-ethernet---bus-model)
-        -   [Classic Ethernet - Hub
-            Model](#classic-ethernet---hub-model)
-        -   [Switched Ethernet](#switched-ethernet)
-        -   [Hubs vs Switches](#hubs-vs-switches)
-        -   [Fast Ethernet](#fast-ethernet)
-        -   [10 Gigabit Ethernet](#gigabit-ethernet)
-        -   [Link Layer - Wireless LANs](#link-layer---wireless-lans)
+-   [Link Layer](#link-layer)
+    -   [Ethernet](#ethernet)
+    -   [Link Layer Purpose](#link-layer-purpose)
+    -   [Medium Access Control
+        Sublayer](#medium-access-control-sublayer)
+    -   [Broadcast Channels Collisions](#broadcast-channels-collisions)
+    -   [Ethernet](#ethernet-1)
+    -   [Classic Ethernet](#classic-ethernet-1)
+        -   [Classic Ethernet - Bus Model](#classic-ethernet---bus-model)
+        -   [Classic Ethernet - Hub Model](#classic-ethernet---hub-model)
+    -   [Switched Ethernet](#switched-ethernet)
+    -   [Hubs vs Switches](#hubs-vs-switches)
+    -   [Fast Ethernet](#fast-ethernet)
+    -   [10 Gigabit Ethernet](#gigabit-ethernet)
+    -   [Link Layer - Wireless LANs](#link-layer---wireless-lans)
         -   [Collision Management](#collision-management)
         -   [802.11 Frame](#frame)
         -   [802.11 Security](#security)
-        -   [Network Discovery and Power
-            Usage](#network-discovery-and-power-usage)
-        -   [Network Discovery Security](#network-discovery-security)
-        -   [Evil Portal](#evil-portal)
-        -   [Types of Cryptography](#types-of-cryptography)
-        -   [Key Sizes](#key-sizes)
-        -   [What's the purpose of a
-            certificate?](#whats-the-purpose-of-a-certificate)
-        -   [Certificate Hierarchies](#certificate-hierarchies)
-        -   [Trust anchors and certificate
-            authorities](#trust-anchors-and-certificate-authorities)
-        -   [Trusting root certificates](#trusting-root-certificates)
-        -   [Certificate Issuance](#certificate-issuance)
-        -   [Issues with Certificate
-            Issuance](#issues-with-certificate-issuance)
-        -   [Certificate Revocation](#certificate-revocation)
-        -   [Certificate Transparency](#certificate-transparency)
-        -   [Certificate Validation](#certificate-validation)
-        -   [Secure Communication](#secure-communication)
-        -   [TLS Handshake](#tls-handshake)
-        -   [Diffie-Hellman Key Exchange](#diffie-hellman-key-exchange)
-        -   [Diffie-Hellman Key Exchange
-            Calculation](#diffie-hellman-key-exchange-calculation)
-        -   [TLS](#tls)
-        -   [Local TLS Interception](#local-tls-interception)
-        -   [Network Level TLS
-            Interception](#network-level-tls-interception)
-        -   [Server-side problems](#server-side-problems)
-        -   [System Security](#system-security)
-        -   [System Security Threats](#system-security-threats)
-        -   [Full Disk Encryption (FDE)](#full-disk-encryption-fde)
-        -   [Cold boot attack](#cold-boot-attack)
-        -   [File System Encryption](#file-system-encryption)
-        -   [Runtime Attacks](#runtime-attacks)
+    -   [Network Discovery and Power
+        Usage](#network-discovery-and-power-usage)
+    -   [Network Discovery Security](#network-discovery-security)
+    -   [Evil Portal](#evil-portal)
+-   [Cryptography](#cryptography)
+    -   [Encryption](#encryption)
+    -   [Decryption](#decryption)
+    -   [Types of Cryptography](#types-of-cryptography)
+    -   [Key Sizes](#key-sizes)
+-   [Certificates](#certificates)
+    -   [What's the purpose of a
+        certificate?](#whats-the-purpose-of-a-certificate)
+    -   [Certificate Hierarchies](#certificate-hierarchies)
+    -   [Trust anchors and certificate
+        authorities](#trust-anchors-and-certificate-authorities)
+    -   [Trusting root certificates](#trusting-root-certificates)
+    -   [Certificate Issuance](#certificate-issuance)
+    -   [Issues with Certificate
+        Issuance](#issues-with-certificate-issuance)
+    -   [Certificate Revocation](#certificate-revocation)
+    -   [Certificate Transparency](#certificate-transparency)
+    -   [Certificate Validation](#certificate-validation)
+-   [TLS](#tls)
+    -   [Secure Communication](#secure-communication)
+    -   [TLS Handshake](#tls-handshake)
+    -   [Diffie-Hellman Key Exchange](#diffie-hellman-key-exchange)
+    -   [Diffie-Hellman Key Exchange
+        Calculation](#diffie-hellman-key-exchange-calculation)
+    -   [TLS in use](#tls-in-use)
+    -   [Local TLS Interception](#local-tls-interception)
+    -   [Network Level TLS
+        Interception](#network-level-tls-interception)
+    -   [Server-side problems](#server-side-problems)
+-   [System Security](#system-security)
+    -   [System Security Threats](#system-security-threats)
+    -   [Full Disk Encryption (FDE)](#full-disk-encryption-fde)
+    -   [Cold boot attack](#cold-boot-attack)
+    -   [File System Encryption](#file-system-encryption)
+    -   [Runtime Attacks](#runtime-attacks)
         -   [WannaCry attack](#wannacry-attack)
     -   [Viruses/Worms/Trojan Horses](#viruseswormstrojan-horses)
         -   [Malware](#malware)
@@ -144,10 +151,11 @@ Exam Revision Notes
             breach'd](#some-idiots-getting-their-data-breachd)
         -   [AWS EC2](#aws-ec2)
         -   [AWS Credentials](#aws-credentials)
+-   [Future of Computing](#future-of-computing)
     -   [Platform as a Service](#platform-as-a-service)
-        -   [IaaS vs PaaS vs SaaS](#iaas-vs-paas-vs-saas)
-        -   [Severless - Function as a
-            Service](#severless---function-as-a-service)
+    -   [IaaS vs PaaS vs SaaS](#iaas-vs-paas-vs-saas)
+    -   [Severless - Function as a
+        Service](#severless---function-as-a-service)
 
 Good luck everyone! :muscle:
 
@@ -195,7 +203,7 @@ OSI vs TCP/IP
 -   A *protocol* is a method of transfering data or performing
     operations from one layer to another of the same depth
     -   Think *horizontally*
--   ![](examrev/examrev1.png "fig:")
+-   ![](examrev/examrev1.png "fig:fig:")
 
 ### Connection Oriented vs. Connectionless
 
@@ -245,17 +253,17 @@ HTTP
 
 ### HTTP Request Methods
 
-  Method   |Safe  |Idempotent  |Cacheable
-  ---------|------|------------|-----------
-  GET      |Y     |Y           |Y
-  HEAD     |Y     |Y           |Y
-  POST     |N     |N           |Y/N
-  PUT      |N     |Y           |N
-  DELETE   |N     |Y           |N
-  CONNECT  |N     |N           |N
-  OPTIONS  |Y     |Y           |N
-  TRACE    |Y     |Y           |N
-  PATCH    |N     |N           |N
+  Method    Safe   Idempotent   Cacheable
+  --------- ------ ------------ -----------
+  GET       Y      Y            Y
+  HEAD      Y      Y            Y
+  POST      N      N            Y/N
+  PUT       N      Y            N
+  DELETE    N      Y            N
+  CONNECT   N      N            N
+  OPTIONS   Y      Y            N
+  TRACE     Y      Y            N
+  PATCH     N      N            N
 
 ##### ***Idempotent***:
 
@@ -323,7 +331,7 @@ else is optional.***
   2xx    Success        200 = request succeeeded; 204 = no content
   3xx    Redirection    301 = Page moved
   4xx    Client Error   404 not found
-  5xx    Server Error
+  5xx    Server Error   
 
 #### HTTP Response Example:
 
@@ -568,13 +576,13 @@ Transport Layer TCP
 
 ### Primitive Functions
 
-  Primitive   |Packet Sent        |Meaning
-  ------------|-------------------|-----------------------------------------------------------
-  LISTEN      |(none)             |Block until something tries to connect (can timeout this)
-  CONNECT     |CONNECTION REQ     |Actively attempt to connect
-  SEND        |DATA               |Send information
-  RECEIVE     |(none)             |Block until DATA packet arrives
-  DISCONNECT  |DISCONNECTION REQ  |This side wants to release connection
+  Primitive    Packet Sent         Meaning
+  ------------ ------------------- -----------------------------------------------------------
+  LISTEN       (none)              Block until something tries to connect (can timeout this)
+  CONNECT      CONNECTION REQ      Actively attempt to connect
+  SEND         DATA                Send information
+  RECEIVE      (none)              Block until DATA packet arrives
+  DISCONNECT   DISCONNECTION REQ   This side wants to release connection
 
 ### Segments
 
@@ -864,7 +872,7 @@ Memory Management
         frame
     4.  Cause the MMU map the virtual page onto the physical page
     5.  Restart the process at the same instruction
--   ![](lec6/lec610.png "fig:")
+-   ![](lec6/lec610.png "fig:fig:")
 
 ### Translation Lookaside Buffer
 
@@ -898,15 +906,15 @@ Internet Layer
     -   Know more about the network/bandwidth of the path
     -   Less congestion/QoS since you can restrict path
 
-Issue|Datagram Network|Virtual Circuit
----|---|---
-Type|Connectionless|Connection-oriented
-Addressing|Each packet has full source and destination|Each packet contains a short VC number|
-State|Routers do not hold state information about connections|Each VC requires router table space per connection
-Routing|Each packet independently|Defined at set-up
-**Quality of Service**|**Difficult**|**Easy if enough resources**
-**Congestion control**|**Difficult**|**Easy if enough resources**
-Only really have to remember the above
+Issue|Datagram Network|Virtual Circuit ---|---|---
+Type|Connectionless|Connection-oriented Addressing|Each packet has full
+source and destination|Each packet contains a short VC number|
+State|Routers do not hold state information about connections|Each VC
+requires router table space per connection Routing|Each packet
+independently|Defined at set-up **Quality of
+Service**|**Difficult**|**Easy if enough resources** **Congestion
+control**|**Difficult**|**Easy if enough resources** Only really have to
+remember the above
 
 Quality of Service
 ------------------
@@ -1098,9 +1106,9 @@ A mask works like this:
 -   If router *j* is on the *optimal path from router i to k* then the
     optimal path from *j* to *k* also falls along the same route
 
-```
-    i -------------> j --------------> k
-```
+<!-- -->
+
+        i -------------> j --------------> k
 
 ##### Sink Tree
 
@@ -1173,6 +1181,9 @@ A mask works like this:
 -   Owner of IP address responds with it's MAC address
 -   Low level sending done via MAC addresses
 
+Link Layer
+==========
+
 ##### Ethernet
 
 ###### Two flavours:
@@ -1224,7 +1235,7 @@ Ethernet is old af and not made with a lot of modern features in mind.
 -   Half duplex lets you have a longer cable
 -   Originally had a huge effect on the length of the cable we could use
 
-### Broadcast channels collicions
+### Broadcast Channels Collisions
 
 -   We need to avoid collisions where two people broadcast shit at the
     same time
@@ -1265,15 +1276,15 @@ Ethernet is old af and not made with a lot of modern features in mind.
     -   Terminate at ends of line
 
 ##### Ethernet Frames
-```
-    [8][6][6][2][0-1500][0-46][4]
 
-    Ethernet (DIX)
-    [Preamble][Destination Address][Source Address][Type][Data][Pad][Check-sum]
+        [8][6][6][2][0-1500][0-46][4]
 
-    Ethernet IEEE802.3
-    [Preamble][SOF][Destination Address][Source Address][Length][Data][Pad][Check-sum]
-```
+        Ethernet (DIX)
+        [Preamble][Destination Address][Source Address][Type][Data][Pad][Check-sum]
+
+        Ethernet IEEE802.3
+        [Preamble][SOF][Destination Address][Source Address][Length][Data][Pad][Check-sum]
+
 -   Link layer kinda breaks layer structure
 -   People don't like type vs length
     -   Breaks layers
@@ -1526,6 +1537,9 @@ Ethernet is old af and not made with a lot of modern features in mind.
     performing this attack
 -   wtf
 
+Cryptography
+============
+
 #### Encryption
 
 -   Hiding data from everyone except those holding the decryption key
@@ -1749,6 +1763,9 @@ Ethernet is old af and not made with a lot of modern features in mind.
     }
     ```
 
+Certificates
+============
+
 ### What's the purpose of a certificate?
 
 -   Establish the identity associated with a public key
@@ -1960,6 +1977,9 @@ Ethernet is old af and not made with a lot of modern features in mind.
         -   Shouldn't accept certificates that are used for something it
             states it shouldn't be used for
 
+TLS
+===
+
 ### Secure Communication
 
 -   Standards get outdated *really fast*
@@ -2032,7 +2052,7 @@ Ethernet is old af and not made with a lot of modern features in mind.
     -   And it works because they equal each other:
         -   `g^ba mod p = g^ab mod p`
 
-### TLS
+### TLS in use
 
 -   Should *always be between the exact process and the exact server*
 -   It seems to be good
@@ -2102,7 +2122,8 @@ Ethernet is old af and not made with a lot of modern features in mind.
 -   **Fundamentally breaks concept of end-to-end encryption**
 -   Proxies analyse and inject content into pages
 
-### System Security
+System Security
+===============
 
 -   Protecting computer systems from theft and damage to their
     hardware/software and data
@@ -2452,6 +2473,9 @@ Viruses/Worms/Trojan Horses
     -   Uber *secretly paid 100k usd to the attackers to delete the
         data*
 
+Future of Computing
+===================
+
 Platform as a Service
 ---------------------
 
@@ -2507,6 +2531,6 @@ academic/really high powered shit
     -   CDN is good at delivering static stuff
     -   Moves all your dynamic stuff to the cloud network
 
-```
-good luck i hope u do well c:
-```
+<!-- -->
+
+    good luck i hope u do well c:
