@@ -15,7 +15,14 @@ Hopefully you will find these useful :smiley:
 
 ## Contents:
 
-### 2018 (Semester 1) Work in Progress :construction:
+### 2018 (Semester 2)
+
+Final semester of Undergraduate degree (hopefully!). This semester I'll be continuing to use Markdown for nice inline Github notes :smile:
+- [**IT Project (COMP30022)**](COMP30022)
+- [**Graphics and Interactions (COMP30019)**](COMP30019)
+- [**Models of Computation (COMP30026)**](COMP30026)
+
+### 2018 (Semester 1)
 
 This semester I decided to experiment using Markdown instead. It's a more universal format than the [Notes](https://packagecontrol.io/packages/Notes) syntax I previously used and, more importantly, renders nicely in GitHub and allows the use of inline images. I wrote everything using Sublime Text with the [ImagePaste](https://packagecontrol.io/packages/ImagePaste) package, which allows you to `Ctrl+V` images into Sublime. I also used [Markdown Preview](https://packagecontrol.io/packages/MarkdownPreview) which allows you to preview your Markdown text as you write it!
 
