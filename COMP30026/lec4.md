@@ -15,7 +15,6 @@ In house 3: Husband: If I am a knight then so is my wife
 **Solution:**
 ```
 H : Husband is a knight
-W : Wife
 
 Don't know if Husband is a Knave or a Knight
 

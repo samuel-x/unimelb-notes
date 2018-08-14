@@ -18,24 +18,24 @@ Has he got sufficient information to decide who (if any) are guilty?
 
 **To solve this, we break it up:**
 - Huey's Statement:
-	- "H" : D ⇔ L `(Duwer is true if and only if Louie is true)`
-- Duey's Statement:
+	- "H" : D ⇔ L `(Dewey is true if and only if Louie is true)`
+- Dewey's Statement:
 	- "D" : H ⇒ D
 - Louie's Statement:
 	- "L" : ¬(D ∧ L)
 
 **Then we can create a truth table:**
 
-H|D|L|∧
----|---|---|---
-1|1|1|1
-0|1|1|0
-0|1|1|0
-1|1|0|0
-1|0|1|0
-0|0|1|0
-0|1|1|0
-1|1|0|0
+H|D|L|"H"|"D"|"L"|∧
+---|---|---|---|---|---|---
+0|0|0|1|1|1|1
+0|0|1|0|1|1|0
+0|1|0|0|1|1|0
+0|1|1|1|1|0|0
+1|0|0|1|0|1|0
+1|0|1|0|0|1|0
+1|1|0|0|1|1|0
+1|1|1|1|1|0|0
 
 ### Propositional Logic: Syntax
 - So usually creating a truth table for everything can get a bit weird
@@ -53,7 +53,9 @@ H|D|L|∧
 - We can drop outermost parentheses
 - We can assume that ¬ binds tighter than ∧ and ∨
 	- This is similar to operator precedence (BODMAS)
+	- Imply has lower precedence
 - These bind tighter than ⊕, which binds tighter than ⇒ and ⇔
+- negate > disjunct = conjunct > xor > imply > biimply
 - With these conveniences we can write:
 	- `((P ∧ (¬Q)) ⇒ (P ∨ (P ⇔ Q)))`
 	- as
