@@ -79,7 +79,6 @@ Graphics and Interaction COMP30019 Lecture 4
 - **Eyeball in Hand**
 	- Manipulate the viewpoint as if it was held in his/her hand
 	- User imagines moving him/herself around the object
-	- FPS
 - **World in Hand**
 	- User's navigation directly to the object or environment to be moved
 	- User imagines that the object is in his/her hand as the mouse is moved

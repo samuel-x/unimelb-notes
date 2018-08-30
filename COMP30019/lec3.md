@@ -69,9 +69,10 @@ Graphics and Interaction COMP30019 Lecture 3
 - ![](lec3/lec32.png)
 
 ##### Pixel Shader Stage
-- Produce colour valuesd for each interpolated pixel fragment
+- Produce colour values for each interpolated pixel fragment
 - Per-pixel lighting can be performed
 - Produce depth values for depth buffering
+	- When two pixels are in the same projection position - you render the one with the less depth (i.e. the closer one)
 - Instagram filters come in here
 
 ##### Output Merger Stage
