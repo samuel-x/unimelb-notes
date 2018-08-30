@@ -71,7 +71,7 @@ Graphics and Computation COMP30019 Lecture 9
 		- Hair
 		- Fur
 		- Grass
-	- ![](let9/let90.png)
+	- ![](lec9/lec90.png)
 - Particle simulations are achieved via
 	- **Sprites (2D)**
 	- **Voxels (3D)**
@@ -83,10 +83,10 @@ Graphics and Computation COMP30019 Lecture 9
 	- Sprite dimensions
 - [You can still use it in a 3D context](https://www.youtube.com/watch?v=EKQKUVrIbkA)
 
-![](let9/let91.png)
+![](lec9/lec91.png)
 
 ### Voxels
 - Essentially 3D pixels
 - Used quite commonly in cinema since performance is less of an issue
 - Quite [computationally complex](https://www.youtube.com/watch?v=miWXtX46QAY)
-- ![](let9/let92.png)
+- ![](lec9/lec92.png)
