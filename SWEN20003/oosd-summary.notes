@@ -545,10 +545,10 @@ gg midsem
 - In the Comparable<T> class
 - Comparable<T> classes must implement int compareTo(object)
 
-There is also a thing about Inheritence vs Interface - when do you use abstract
+There is also a thing about Inheritance vs Interface - when do you use abstract
 classes as inheritance and when do you use interfaces?
 
-Inheritence specifies a "is a" relationship i.e.
+Inheritance specifies a "is a" relationship i.e.
 
 -> Water "is a" liquid
 -> Sam "is a" failure
