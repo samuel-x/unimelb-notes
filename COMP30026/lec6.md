@@ -190,3 +190,5 @@ wff → atom
 	- `∀x (Man(x) ⇒ Mortal(x))`
 - “A woman is stronger than a man”:
 	- `∀x∀y ((Woman(x) ∧ Man(y )) ⇒ Stronger(x, y ))`
+
+
