@@ -47,3 +47,69 @@ Models of Computation COMP30026 Lecture 9
 	- `{x ↦ a, y ↦ g(b, f(u)), z ↦ g(b, f(u))}`
 	- `{x ↦ a, z ↦ y}` <-- this is also equivalent to the first one and is also a MGU
 - This is because they avoid making unnecessary substitutions
+
+## Unification Algorithm
+- This is an *algorithm to unify `s` and `t`* and will produce a mgu
+- Start with *two terms `s` and `t`*
+- If the result is 'failure', no unifier exists
+- Do the following:
+	1. When `F(s₁...sₙ) = F(t₁...tₙ)` *(two predicates with the **same arity**)*
+		- Replace the equations for each argument e.g. `s₁=t₁` etc.
+	2. When `F(s₁...sₙ) = G(t₁...tₘ)` *(two predicates with **different arity**)*
+		- **Failure**
+	3. `x = x`
+		- *Delete the equation*
+	4. `t = x` (where *t* is *not a variable*)
+		- Replace the equation by `x = t`
+	5. `x = t` where `t` contains `x`
+		- **Failure**
+	6. `x = t` where `t` contains no `x` but `x` occurs in other equations:
+		- Replace `x` by `t` in those other equations
+
+### Solving Term Equations Example 1
+`f(h(y), g(y, a), z) = f(x, g(v, v), b)`
+![](lec9/lec90.png)
+
+### Solving Term Equations Example 2
+`f(x, a, x) = f(h(z, b), y, h(z, y))`
+![](lec9/lec91.png)
+
+### Solving Term Equations Example 3
+`f(x, g(v, v), x) = f(h(y), g(y, z), z)`
+![](lec9/lec92.png)
+
+## Resolvents
+- Resolvents for propositional logic went like this:
+	- Two literals are complementary if one is `L` and the other is `¬L`
+	- The *resolvent of two clauses* containing complementary literals `L`, `¬L` is their union omitting `L` and `¬L`
+- Rsolvents for predicate logic go like this:
+	- Two literals `L` and `¬L` are *complementary* if `{L,L'}` is *unifiable*
+
+## Automated Inference with Predicate Logic Example
+- Ok so this bit is a bit long
+- This walks through the whole example of *automated inferencing*
+- We'll be using the following example:
+	- ![](lec9/lec93.png)
+- Once you have all your predicates, *convert them to clausal form*
+	- This is done by simply doing the transformations we learnt earlier, e.g. `F(x) ⟹ G(y)` becomes `¬F(x) ∨ G(y)`
+- Once you have a form with *only `∧'s` and `∨'s`*, convert it to a clausal form using the {} brackets 
+- For the statement you're trying to prove (the "therefore" statement), *negate* the clausal form that you end up with
+- ![](lec9/lec94.png)
+- Then resolve it using the methods described before with mapping terms and variables etc.
+- You can use clauses multiple times, but may only use the negate clause once (the negated statement you're trying to prove)
+- ![](lec9/lec95.png)
+- And you're done!
+
+## Factoring
+- You can rewrite clauses via *factoring*
+- If some clauses can be unified then we can simplify it and present it as less clauses:
+![](lec9/lec96.png)
+- This is sometimes required to create a resolution
+![](lec9/lec97.png)
+
+## The Resolution Method
+- There's a problem with the above stuff: How do we figure out when to terminate?
+- Sometimes we can get into an infinite loop when we're resolving
+- If we can finish it in a finite number of steps it is *sound* and *complete*
+- There's a bunch of different approaches to resolution (i.e. using different search strategies) but they're *outside of the scope of this course*
+	- Just resolve it and hope you figure it out lol
