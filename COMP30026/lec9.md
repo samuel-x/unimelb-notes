@@ -113,3 +113,8 @@ Models of Computation COMP30026 Lecture 9
 - If we can finish it in a finite number of steps it is *sound* and *complete*
 - There's a bunch of different approaches to resolution (i.e. using different search strategies) but they're *outside of the scope of this course*
 	- Just resolve it and hope you figure it out lol
+
+## Horn Clauses
+- A *Horn* clause is a clause with at most one positive literal
+- All seven clauses used in that tadpole example were horn clauses
+- This clause: `s {¬T(z), ¬D(y ), ¬E(y , z), M(z)}` is a horn clause
