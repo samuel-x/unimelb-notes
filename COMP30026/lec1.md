@@ -51,26 +51,6 @@ Consider the three symbols I, M, U with the following rules:
 
 Starting from _MI_ generate _MU_
 
-```
-MI 				1
-MII 			1
-MIIII 			2
-MIIIIU 			4
-MIUU 			1
-MIUUIUU 		1
-MIUUIUUIUUIUU    <- Apply rule 4 three times 
-MIIIIUU 		3
-MUIUU  			4
-MUI 			2
-MUIU  			1
-MUIUUIU   		1 
-MUIUUIUUIUUIU 	4 (3 times)
-MUIIIIU  		3
-MUIUU  			4
-MU
-
-i did it!
-```
 - The logic behind this is finding the *correct multiples of 'I' and 'U'*
 	- You can then quantify each I in an equation, e.g. `(3n + 1) I's for operation 1`
 - Generally when we try this on paper we're doing a random (bad) search
