@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage{tikz}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usetikzlibrary{arrows.meta}
+\graphicspath{ {./images/} }
+\pagestyle{empty}
+\textwidth      165mm
+\textheight     252mm
+\topmargin      -18mm
+\oddsidemargin  -2mm
+\evensidemargin -2mm
+\renewcommand{\baselinestretch}{0.97}
+\renewcommand{\theenumi}{\alph{enumi}}
+\newcommand{\impl}{\mathbin{\Rightarrow}}
+\newcommand{\biim}{\mathbin{\Leftrightarrow}}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\newcommand{\lto}{\mathbin{\to}}
+
+\begin{document}
+
+\begin{center}
+{\sc The University of Melbourne
+\\
+School of Computing and Information Systems
+\\ 
+COMP30026 Models of Computation}
+\bigskip \\
+{\Large\bf "You're gonna have a bad time."}
+\end{center}
+
+\subsection*{Q1 A}
+
+Multiple approaches we can use: \\
+Truth Tables: \\
+Prove logical consequence via: "Everywhere we find a 1 in $\psi$ we should find in $\gamma$" \\
+Answer is: $$Q \impl R$$ \\
+
+\subsection*{Q1 B}
+
+From the inormation provided, we can write: \\
+$$ r \biim s $$
+$$ (\neg r \land \neg s) \impl \neg p $$
+$$ r \lor s \lor \neg p $$
+$$ q \impl r \bigoplus s $$ 
+$$ r \land s \impl q $$ \\
+From these we can derive: \\
+$$r \lor \neg q $$
+$$\neg p$$
+$$\neg q$$
+$$r \impl q$$
+$$\neg r$$\\
+Note: We do not need to show working out for this, but showing working out can result in more generous marks. \\
+Important Quotes from Harold:\\
+"If there is a result we have shown in the lectures, we can take that for granted". \\
+"If there is a language that we've come across - you don't have to prove that language." \\
+
+Answer is: MacGuffin cannot show films that week.
+
+\subsection*{Q2 A}
+
+Approach: Find an interpretation which makes this formula true and one that makes it false.\\
+For true F, we can say it represents the equal predicate.\\
+For false F, we can say it represents the less than predicate.\\
+Because it's $F \land G$, we don't even have to interpret $G$.\\\\
+Note: Make sure you define your domain as well! \\\\
+Typical answer syntax: \\
+Consider dom Z, let $P(x, y)$ be $x < y$. \\
+
+\subsection*{Q2 B}
+
+Approach: Same as above.
+
+\subsection*{Q2 C}
+
+Approach: Negate G, and we get $\neg P(x, y) \lor P(y, x)$, Negate H and we get $\exists (\neg P(x, x) \land \forall y P(y, x))$. When we try and resolve after skolemization then we get something unsatisfiable instantly, which means it is valid.
+
+Answer: $G \models H$
+
+\subsection*{Q3 A}
+
+Approach: Figure out the connectives, and then build up the formula from that.\\
+"No cat is a friend of x": $\neg\exists y(C(y) \impl F(y, x))$ \\
+Push negation of above in : $\forall y(C(y) \impl \neg F(y, x))$ \\
+"x eats pasta": $\exists z(P(z) \impl E(x,z))$ \\\\
+Now we put it together:\\
+"If dog does thing then do that thing" : $$\forall xyz (D(x) \land \forall y(C(y) \impl \neg F(y, x))) \impl \exists z(P(z) \impl E(x,z)))$$
+Note: If the terms inside the predicate formula is $\land$, then you can push them in, otherwise you can't.\\
+
+\subsection*{Q3 B}
+
+Approach: This is all mechanical, so just do the formulas we learnt with substitution and pushing negations in.
+
+\subsection*{Q3 C}
+
+Approach: First things first, negate the end statement! Then we can just resolve.\\
+
+Begin with $\neg L(b,b)$, and start resolving e.g. with $L(b,x) \lor \neg L(x,c) $ etc.
+
+\subsection*{Q4 A}
+
+Tick the following:
+$abba$, $ababba$, $bababa$
+
+\subsection*{Q4 B}
+
+Skipped.
+
+\subsection*{Q4 C}
+
+Approach 1:
+Write the DFA for a*b* and b*a* seperately, and then combine with the product. (This will probably take too long.) \\
+Approach 2: 
+Just look at it and consider each of the parts separately.\\
+
+Answer: $a* \cup b*$
+
+\subsection*{Q5 A}
+
+Skipped.
+
+\subsection*{Q5 B}
+Q: How do you see the smallest regular expression? \\
+A: You just do. \\
+
+\subsection*{Q5 C}
+
+Approach: Note how regular expressions are a subset of context free grammars, so we can express any particular string in a language in regexp.\\
+This is a trick question:\\
+S can generate literally anything since it goes to T (the first two T rules generate any string), so we can disregard the rest. \\
+The regular language is $(a \cup b)*$. \\
+
+\subsection*{Q6 C}
+
+You won't get a question like this at all? wat. \\
+Note: Induction will not be tested.\\
+
+\subsection*{Q6 B}
+
+Approach: Simply create the same string from this language using alternative pathways. \\
+In this case we can just use both the S's in different order to generate the string "a a a a a...." \\
+
+\subsection*{Q6 C}
+
+Answer: $$S \rightarrow \epsilon | aaaa | a^2 | a^3 | .... | a^{16} | a^{18}T$$ and $$T \rightarrow \epsilon | aT$$\\
+Note: Make sure you actually write all the rules in the exam, or alternatively write "$a^k$ where k ..."\\
+Be careful with your linting.
+
+\subsection*{Q7 A}
+
+Approach: Every time we want to show a subset, show that for everything $F$ it's also a member of $G$. Here in the example they give, $y$ is at least one of the sets in $F$ and $z$ is the member of all sets in $G$.
+
+\subsection*{Q7 B}
+
+Approach: This looks really complicated, but you need to look past the illusion 100 skills. We can interpret this as something that it's something that's definitely in the first part $(L \ M)*$ but definitely not in the second part $(L* \ M*)$. \\
+
+Answer: In this case, it's actually the empty set as $(L* \ M*)$ can't be empty.\\
+
+\subsection*{Q7 C}
+
+Approach: This looks really hard, but just start trying with small cases, e.g.\\
+$L = {a,b}$
+$M = {b}$\\
+From this we can see that the first part $(a\cup b* \ b*)$, and the second part ${ab \ b}$ which results in strings with only $a$.
+
+\subsection*{Q8 A}
+
+Approach: It’s a function if the first number isn’t mapped to multiple things, and it’s total if the entire relation maps their first numbers to stuff.
+
+\subsection*{Q8 B}
+
+I missed this.
+
+\subsection*{Q9}
+
+Approach: Draw the first 4+1 states, and then draw the reject states going back off the tape.\\
+Move along the tap and read b's and a's until we get to 4th last symbol, and accept an a, then start moving back until we can reject.\\
+This is definitely decideable as it's a regular expression.\\
+
+\end{document}
