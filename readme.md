@@ -13,6 +13,28 @@ Hopefully you will find these useful :smiley:
 
 **Good Luck, and Godspeed!**
 
+**Update:**
+
+I've since graduated and moved to Sydney to work for [Atlassian](https://www.atlassian.com/). It's been awesome! Message me if you want to know anything! 
+
+Here are some resources I've found useful on my journey.
+
+- [Typescript Deep Dive](https://basarat.gitbook.io/typescript/) - My role has been on a Node/Typescript stack, highly recommend this book if you're keen on learning it!
+- [The Missing Semester of your CS Education](https://missing.csail.mit.edu/) - All sorts of miscellaneous good-to-know stuff they don't teach you in uni
+- [Developer Roadmap 2020](https://github.com/kamranahmedse/developer-roadmap) - What do I want to do??????
+
+Of course, there's a billion ways of revising for interviews. Can't really go wrong with cracking the coding interview, or smashing some problems on leetcode / hackerrank. Personally, I'd try to spend more time refining what you'll talk about outside of the programming section of an interview. I feel like in my case it was more important to revise general software design questions and general speech skills than know how to flip a whatever-the-heck-kinda-tree they call it these days. For the most part, it's definitely underrated how far articulating your thought process well can take you.
+
+I'd also keep in mind that as great as it is to spend all your energy revising for interviews and looking for the next job, take it easy. There's always tomorrow - you _don't need to have your shit together before uni ends_. It's not worth the stress (At least, that's what I wish I could have told myself!).
+
+Check out these things I found along the way:
+
+- [coding-interview-university](https://github.com/jwasham/coding-interview-university) - A repo full of all sorts of interview preparation
+- [what-happens-when](https://github.com/alex/what-happens-when) - An awesome explanation of all the things that happen when you type 'google.com' into your search bar (a great way to get a full picture of how things work)
+- [https://triplebyte.com/](TripleByte) - A good way of getting an idea of what sort of questions they'd ask a Software Dev, and if you do well, then hey! Might get a job offer or two ;)
+
+If you find more things, feel free to make a PR!
+
 ## Contents:
 
 ### 2018 (Semester 2)
@@ -32,6 +54,7 @@ This semester I decided to experiment using Markdown instead. It's a more univer
 	- (06/04/18) Completed up till week 6
 	- (21/05/18) Completed the last Tutorial/Lecture
 	- Crazy dense subject on networks. It's pretty good so far. :+1:
+	- Arguably one of the most important courses in the unimelb Computer Science major
 - [**Software Modelling and Design (SWEN30006)**](SWEN30006)
 	- If you thought database systems was dry and uncoordinated, wait till you do this subject
 	- Really inconsistent, conflicting information
