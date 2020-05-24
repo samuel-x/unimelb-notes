@@ -31,7 +31,6 @@ Check out these things I found along the way:
 
 - [coding-interview-university](https://github.com/jwasham/coding-interview-university) - A repo full of all sorts of interview preparation
 - [what-happens-when](https://github.com/alex/what-happens-when) - An awesome explanation of all the things that happen when you type 'google.com' into your search bar (a great way to get a full picture of how things work)
-- [https://triplebyte.com/](TripleByte) - A good way of getting an idea of what sort of questions they'd ask a Software Dev, and if you do well, then hey! Might get a job offer or two ;)
 
 If you find more things, feel free to make a PR!
 
